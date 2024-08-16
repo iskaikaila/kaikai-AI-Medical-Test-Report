@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { login } from '../services/authService';
 
 const Login = () => {
@@ -43,6 +44,7 @@ const Login = () => {
                 {error && <p>{error}</p>}
                 <button type="submit">登录</button>
             </form>
+            <p>还没有账户？ <Link to="/register">注册</Link></p>
         </div>
     );
 };
