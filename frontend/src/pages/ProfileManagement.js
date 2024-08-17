@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 
 const sampleData = [
-    { id: 1, name: 'John Doe', testTime: '2024-08-01', testType: 'Blood Test', testStatus: 'Completed', fileDetails: 'View Details' },
-    { id: 2, name: 'Jane Smith', testTime: '2024-08-02', testType: 'X-Ray', testStatus: 'Pending', fileDetails: 'View Details' },
-    { id: 3, name: 'Bob Johnson', testTime: '2024-08-03', testType: 'MRI', testStatus: 'In Progress', fileDetails: 'View Details' },
+    { id: 1, name: 'John Doe', age: 30, gender: 'Male', testDetails: 'Blood Test - 2024-08-01' },
+    { id: 2, name: 'Jane Smith', age: 28, gender: 'Female', testDetails: 'X-Ray - 2024-08-02' },
+    { id: 3, name: 'Bob Johnson', age: 45, gender: 'Male', testDetails: 'MRI - 2024-08-03' },
 ];
 
 function ProfileManagement() {
@@ -13,6 +13,13 @@ function ProfileManagement() {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortKey, setSortKey] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
+    const [isModalOpen, setIsModalOpen] = useState(false);  // 控制模态框显示与隐藏
+    const [newPatient, setNewPatient] = useState({
+        name: '',
+        age: '',
+        gender: '',
+        testDetails: ''
+    });
     const navigate = useNavigate();
 
     const handleSearchFieldChange = (event) => {
@@ -36,9 +43,41 @@ function ProfileManagement() {
         navigate(`/patient/${patientId}`);
     };
 
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleInputChange = (e) => {
+        setNewPatient({ ...newPatient, [e.target.name]: e.target.value });
+    };
+
+    const handleAddPatient = () => {
+        // 这里可以处理将新患者添加到数据库的逻辑
+        console.log('New patient added:', newPatient);
+
+        // 清空表单并关闭模态框
+        setNewPatient({ name: '', age: '', gender: '', testDetails: '' });
+        handleCloseModal();
+    };
+
+    // 处理退出登录
+    const handleLogout = () => {
+        // 处理退出登录逻辑，如清除 token 或重定向到登录页面
+        navigate('/login');
+    };
+
+    // 处理跳转到医生用户信息页面
+    const handleGoToPersonalInfo = () => {
+        navigate('/personal-information');
+    };
+
     const filteredData = sampleData
         .filter(patient => {
-            if (searchField === 'id') {
+            if (searchField === 'id' || searchField === 'age') {
                 return patient[searchField].toString().includes(searchTerm);
             }
             return patient[searchField].toLowerCase().includes(searchTerm.toLowerCase());
@@ -56,16 +95,20 @@ function ProfileManagement() {
 
     return (
         <div>
-            <NavBar />
+            <NavBar
+                page="profile"
+                onLogout={handleLogout}
+                onGoToPersonalInfo={handleGoToPersonalInfo}
+            />
             <h2>Profile Management</h2>
+            <button onClick={handleOpenModal}>Add Patient</button> {/* 添加信息按钮 */}
             <div>
                 <label htmlFor="searchField">Search by:</label>
                 <select id="searchField" value={searchField} onChange={handleSearchFieldChange}>
                     <option value="name">Patient Name</option>
                     <option value="id">Patient ID</option>
-                    <option value="testTime">Test Time</option>
-                    <option value="testType">Test Type</option>
-                    <option value="testStatus">Test Status</option>
+                    <option value="age">Age</option>
+                    <option value="gender">Gender</option>
                 </select>
                 <input
                     type="text"
@@ -79,10 +122,9 @@ function ProfileManagement() {
                     <tr>
                         <th onClick={() => handleSort('id')}>Patient ID {sortKey === 'id' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
                         <th onClick={() => handleSort('name')}>Patient Name {sortKey === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('testTime')}>Test Time {sortKey === 'testTime' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('testType')}>Test Type {sortKey === 'testType' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('testStatus')}>Test Status {sortKey === 'testStatus' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th>File Details</th>
+                        <th onClick={() => handleSort('age')}>Age {sortKey === 'age' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                        <th onClick={() => handleSort('gender')}>Gender {sortKey === 'gender' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                        <th onClick={() => handleSort('testDetails')}>Test Details {sortKey === 'testDetails' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,18 +132,76 @@ function ProfileManagement() {
                         <tr key={patient.id}>
                             <td>{patient.id}</td>
                             <td>{patient.name}</td>
-                            <td>{patient.testTime}</td>
-                            <td>{patient.testType}</td>
-                            <td>{patient.testStatus}</td>
+                            <td>{patient.age}</td>
+                            <td>{patient.gender}</td>
                             <td>
                                 <button onClick={() => handleViewDetails(patient.id)}>
-                                    {patient.fileDetails}
+                                    {patient.testDetails}
                                 </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+
+            {/* 模态框 */}
+            {isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Add New Patient</h2>
+                        <form>
+                            <div>
+                                <label>Name:</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={newPatient.name}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Age:</label>
+                                <input
+                                    type="number"
+                                    name="age"
+                                    value={newPatient.age}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label>Gender:</label>
+                                <select
+                                    name="gender"
+                                    value={newPatient.gender}
+                                    onChange={handleInputChange}
+                                    required
+                                >
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Test Details:</label>
+                                <input
+                                    type="text"
+                                    name="testDetails"
+                                    value={newPatient.testDetails}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <button type="button" onClick={handleAddPatient}>Add Patient</button>
+                                <button type="button" onClick={handleCloseModal}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

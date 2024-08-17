@@ -3,22 +3,24 @@ import NavBar from './NavBar';
 
 function PersonalInformation() {
 
-    const personalInfo = {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        age: 30,
-        address: '1234 Main St, Anytown, USA'
+    const doctorInfo = {
+        name: 'Dr. John Doe',
+        email: 'dr.johndoe@example.com',
+        specialty: 'Cardiology',
+        phone: '555-1234',
+        clinicAddress: '1234 Heart St, Cardiotown, USA'
     };
 
     return (
         <div>
             <NavBar />
             <div>
-                <h2>Personal Information</h2>
-                <p><strong>Name:</strong> {personalInfo.name}</p>
-                <p><strong>Email:</strong> {personalInfo.email}</p>
-                <p><strong>Age:</strong> {personalInfo.age}</p>
-                <p><strong>Address:</strong> {personalInfo.address}</p>
+                <h2>Doctor's Personal Information</h2>
+                <p><strong>Name:</strong> {doctorInfo.name}</p>
+                <p><strong>Email:</strong> {doctorInfo.email}</p>
+                <p><strong>Specialty:</strong> {doctorInfo.specialty}</p>
+                <p><strong>Phone:</strong> {doctorInfo.phone}</p>
+                <p><strong>Clinic Address:</strong> {doctorInfo.clinicAddress}</p>
             </div>
         </div>
     );

@@ -4,11 +4,11 @@ import NavBar from './NavBar';
 
 const patientData = {
     1: { name: 'John Doe', gender: 'Male', age: 30, contact: '123-456-7890', history: [
-            { date: '2024-07-15', type: '糖尿病', status: 'Completed', result: 'Normal', suggestion: 'Maintain healthy diet' },
+            { date: '2024-07-15', type: 'Blood Test', status: 'Completed', result: 'Normal', suggestion: 'Maintain healthy diet' },
             { date: '2024-06-10', type: 'X-Ray', status: 'Completed', result: 'Fracture in left arm', suggestion: 'Rest and avoid heavy lifting' }
         ]},
     2: { name: 'Jane Smith', gender: 'Female', age: 28, contact: '987-654-3210', history: [
-            { date: '2024-08-02', type: '神经病', status: 'Pending', result: 'N/A', suggestion: 'N/A' },
+            { date: '2024-08-02', type: 'X-Ray', status: 'Pending', result: 'N/A', suggestion: 'N/A' },
         ]},
     3: { name: 'Bob Johnson', gender: 'Male', age: 45, contact: '555-555-5555', history: [
             { date: '2024-08-03', type: 'MRI', status: 'In Progress', result: 'N/A', suggestion: 'N/A' },
@@ -35,7 +35,7 @@ function PatientDetails() {
 
     return (
         <div>
-            <NavBar />
+            <NavBar page="details" />
             <h2>Patient Details</h2>
             <div>
                 <h3>Personal Information</h3>
