@@ -14,7 +14,7 @@ function ProfileManagement() {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortKey, setSortKey] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
-    const [isModalOpen, setIsModalOpen] = useState(false);  // 控制模态框显示与隐藏
+    const [isModalOpen, setIsModalOpen] = useState(false); 
     const [newPatient, setNewPatient] = useState({
         name: '',
         age: '',
