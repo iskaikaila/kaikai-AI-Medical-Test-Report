@@ -1,9 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function NavBar({ page, onLogout, onGoToPersonalInfo }) {
-    const navigate = useNavigate();
-
     return (
         <nav>
             <ul>

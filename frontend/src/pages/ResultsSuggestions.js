@@ -1,25 +1,44 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react'; 
+import { useParams, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 
-const suggestionsData = {
-    "Blood Test": "Based on the blood test results, it is recommended to maintain a balanced diet and monitor cholesterol levels.",
-    "X-Ray": "The X-Ray suggests a minor fracture. It is recommended to rest and avoid strenuous activities.",
-    "MRI": "The MRI indicates no major issues, but regular check-ups are advised to monitor health."
-    // 根据测试类型添加更多的建议数据
+const resultData = {
+    1: { 
+        testType: 'Blood Test', 
+        details: 'Blood test result showing normal levels.', 
+        suggestions: 'Maintain a balanced diet and regular exercise.' 
+    },
+    2: { 
+        testType: 'X-Ray', 
+        details: 'X-Ray shows a minor fracture in the left arm.', 
+        suggestions: 'Rest the arm and avoid heavy lifting.' 
+    },
+    3: { 
+        testType: 'MRI', 
+        details: 'MRI indicates no major issues.', 
+        suggestions: 'Regular follow-up in 6 months.' 
+    },
 };
 
 function ResultsSuggestions() {
-    const { id, type } = useParams();
-    const suggestion = suggestionsData[type] || "No suggestions available for this test type.";
+    const { id } = useParams(); 
+    const navigate = useNavigate();
+    const result = resultData[id];
+
+    const handleBackToPatientDetails = () => {
+        navigate(`/patient/${id}`);
+    };
 
     return (
         <div>
-            <NavBar />
-            <h2>Suggestions for Patient {id}</h2>
-            <h3>{type} Suggestions</h3>
-            <p>{suggestion}</p>
-
+            <NavBar page="results" />
+            <h2>Results and Suggestions</h2>
+            <button onClick={handleBackToPatientDetails}>Back to Patient Details</button>
+            <div>
+                <h3>Test Type: {result?.testType}</h3>
+                <p><strong>Details:</strong> {result?.details || 'No details available.'}</p>
+                <p><strong>Suggestions:</strong> {result?.suggestions || 'No suggestions available.'}</p>
+            </div>
         </div>
     );
 }
