@@ -21,7 +21,7 @@ function Login() {
             const data = await response.json();
 
             if (response.ok) {
-                navigate('/home');
+                navigate('/profile'); // 登录成功后跳转到档案管理页面
             } else {
                 setError(data.message);
             }
@@ -53,7 +53,7 @@ function Login() {
                 <button type="submit">Login</button>
             </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <p>Don't have an account? <button onClick={handleNavigateToRegister}>Register here</button></p>
+            <p>Creat a new account?(only admin) <button onClick={handleNavigateToRegister}>Register here</button></p>
         </div>
     );
 }
