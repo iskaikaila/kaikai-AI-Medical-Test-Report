@@ -1,34 +1,22 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
-const { port, mongoUri } = require('./config');
-const authRoutes = require('./routes/auth');
-const reportRoutes = require('./routes/report');
+const authRoutes = require('./routes/authRoutes');
+require('dotenv').config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',  
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
-// Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/reports', reportRoutes);
 
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
+const PORT = process.env.PORT || 5001;
 
-// Anything that doesn't match the above routes, send back the React index.html
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
-});
-
-// Connect to MongoDB
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
