@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
+import './ProfileManagement.css'; 
 
 const sampleData = [
     { id: 1, name: 'John Doe', age: 30, gender: 'Male', testDetails: 'Blood Test - 2024-08-01' },
@@ -100,9 +101,16 @@ function ProfileManagement() {
                 onLogout={handleLogout}
                 onGoToPersonalInfo={handleGoToPersonalInfo}
             />
-            <h2>Profile Management</h2>
-            <button onClick={handleOpenModal}>Add Patient</button> {/* 添加信息按钮 */}
-            <div>
+            <h3>Profile Management</h3>
+            <header>
+                <img src="/brand-ye.png" alt="Brand Logo" className='header-logo' />
+                <div className="header-text">Welcome to Medixal</div>
+            </header>
+           
+           
+            <button className='button-Add-Patient' onClick={handleOpenModal}>Add Patient</button> {/* 添加信息按钮 */}
+           
+            <div className='searchField'>
                 <label htmlFor="searchField">Search by:</label>
                 <select id="searchField" value={searchField} onChange={handleSearchFieldChange}>
                     <option value="name">Patient Name</option>
@@ -117,6 +125,11 @@ function ProfileManagement() {
                     onChange={handleSearch}
                 />
             </div>
+
+            {/* 添加患者的弹出框 */}
+
+   
+          
             <table>
                 <thead>
                     <tr>
@@ -203,6 +216,7 @@ function ProfileManagement() {
                 </div>
             )}
         </div>
+       
     );
 }
 

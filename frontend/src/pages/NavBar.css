@@ -1,0 +1,36 @@
+ /* 导航栏的CSS */
+ .navbar {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  width: 428px;
+  height: 44px;
+  opacity: 1;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 21.6px;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  vertical-align: middle;
+}
+
+  .navbar ul {
+    list-style-type: none; /* 移除列表项的默认样式 */
+    padding: 0;
+    margin: 0;
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: flex-start; /* 项目在主轴（默认为水平方向）上居左排列 */
+}
+
+.navbar li {
+    margin-right: 45px; /* 右侧外边距 */
+}
+
+.navbar li:first-child {
+    margin-left: 20px; /* 左侧外边距 */
+}
+
+.navbar li:last-child {
+    margin-right: 20px; /* 右侧外边距 */
+}

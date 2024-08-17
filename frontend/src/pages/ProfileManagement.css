@@ -1,0 +1,64 @@
+/* brand-ye图片的CSS */
+.header-logo {
+    position: absolute;
+    left: 60px;
+    top: 20px;
+    width: 180px;
+    height:120px;
+    opacity: 1;
+    background: rgba(29, 33, 41, 1);
+  }
+
+h3{
+    position: absolute;
+    left: 65px;
+    top: 120px;
+    width: 350px;
+    height: 48px;
+    opacity: 1;
+}
+  /* Welcome to Medixal文本的CSS */
+  .header-text {
+    position: relative;
+    left: 50px;
+    top: 110px;
+    width: 350px;
+    height: 48px;
+    opacity: 1;
+    /** 文本1 */
+    font-size: 35px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 21.6px;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .button-Add-Patient{
+    position: relative;
+    left: 650px;
+    top: 95px;
+
+height: 40px;
+opacity: 1;
+background: rgba(1, 133, 124, 1);
+border: 1px solid rgba(0, 0, 0, 1);
+/** 文本1 */
+font-size: 26px;
+font-weight: 400;
+letter-spacing: 0px;
+line-height: 42.19px;
+color: rgba(255, 255, 255, 1);
+text-align: center;
+vertical-align: middle;
+
+  }
+  
+  .searchField {
+    position: relative;
+    top: 95px;
+    left: 650px;
+  }
+  
+  

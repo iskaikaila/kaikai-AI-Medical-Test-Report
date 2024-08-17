@@ -1,0 +1,107 @@
+
+/* 登录容器样式 */
+.login-container {
+    position: relative;  /* 为绝对定位的子元素提供参照 */
+    display: flex;
+    justify-content: center;  /* 水平居中 */
+    align-items: center;  /* 垂直居中 */
+    height: 100vh;  /* 全屏高度 */
+    background-color: #ffeaea00;  /* 背景颜色 */
+}
+
+/* 登录标题样式 */
+.login-title {
+    position: absolute;
+    left: 922px;
+    top: 200px;
+    width: 447px;
+    height: 93px;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 56.26px;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+    vertical-align: middle;
+    opacity: 1;
+}
+
+/* 图像样式 */
+.people-image {
+    position: absolute;
+    left: -19px;
+    top: 425px;
+    width: 482px;
+    height: 465px;
+    opacity: 1;
+}
+
+.brand-image {
+    position: absolute;
+    left: 80px; 
+    top: 20px;
+    width: 342px;
+    height: 265px;
+    opacity: 1;
+}
+
+/* 输入框样式 */
+.login-input {
+    position: absolute;
+    width: 460px;  /* 宽度 */
+    height: 84px;  /* 高度 */
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.02);  /* 背景颜色 */
+    border: 1px solid rgba(0, 0, 0, 1);  /* 边框颜色 */
+    border-radius: 4px;  /* 圆角边框 */
+    font-size: 18px;
+}
+
+/* 用户名输入框位置 */
+.username-input {
+    left: 906px;
+    top: 350px;
+}
+
+/* 密码输入框位置 */
+.password-input {
+    left: 905px;
+    top: 480px;
+}
+
+/* 按钮样式 */
+.login-button {
+    position: absolute;
+    left: 964px;
+    top: 625px;
+    width: 354px;
+    height: 84px;
+    background: rgba(1, 133, 124, 1);  /* 背景颜色 */
+    border: 1px solid rgba(0, 0, 0, 1);  /* 边框颜色 */
+    border-radius: 10px;  /* 圆角边框 */
+    color: white;
+    cursor: pointer;  /* 鼠标指针样式 */
+    font-size: 18px;
+}
+
+/*注册按钮*/
+.Register-button{
+    font-size: 18px;
+    position: absolute;
+    left: 964px; /* 与登录按钮相同的水平位置 */
+    top: 749px; /* 放在登录按钮的正下方 */
+    width: 354px;
+    height: 84px;
+    background: rgba(1, 133, 124, 1);
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    text-align: center; /* 确保文本水平居中 */
+    line-height: 84px; /* 确保文本垂直居中 */
+}
+
+/* 按钮悬停样式 */
+.login-button:hover {
+    background-color: rgba(0, 102, 95, 1);  /* 背景颜色变化 */
+}
