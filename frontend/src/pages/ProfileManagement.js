@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 
 const sampleData = [
-    
     { id: 1, name: 'John Doe', testTime: '2024-08-01', testType: 'Blood Test', testStatus: 'Completed', fileDetails: 'View Details' },
     { id: 2, name: 'Jane Smith', testTime: '2024-08-02', testType: 'X-Ray', testStatus: 'Pending', fileDetails: 'View Details' },
     { id: 3, name: 'Bob Johnson', testTime: '2024-08-03', testType: 'MRI', testStatus: 'In Progress', fileDetails: 'View Details' },
-
 ];
 
 function ProfileManagement() {
@@ -14,6 +13,7 @@ function ProfileManagement() {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortKey, setSortKey] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
+    const navigate = useNavigate();
 
     const handleSearchFieldChange = (event) => {
         setSearchField(event.target.value);
@@ -30,6 +30,10 @@ function ProfileManagement() {
         }
         setSortKey(key);
         setSortOrder(order);
+    };
+
+    const handleViewDetails = (patientId) => {
+        navigate(`/patient/${patientId}`);
     };
 
     const filteredData = sampleData
@@ -90,7 +94,7 @@ function ProfileManagement() {
                             <td>{patient.testType}</td>
                             <td>{patient.testStatus}</td>
                             <td>
-                                <button onClick={() => alert(`Details for patient ID: ${patient.id}`)}>
+                                <button onClick={() => handleViewDetails(patient.id)}>
                                     {patient.fileDetails}
                                 </button>
                             </td>
