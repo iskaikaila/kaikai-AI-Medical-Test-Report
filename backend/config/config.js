@@ -2,7 +2,7 @@ module.exports = {
     development: {
       username: process.env.DB_USERNAME || 'postgres',
       password: process.env.DB_PASSWORD || 'Admin123',
-      database: process.env.DB_NAME || 'user_info',
+      database: process.env.DB_NAME || 'MedixAI',
       host: process.env.DB_HOST || '127.0.0.1',
       dialect: 'postgres',
     },

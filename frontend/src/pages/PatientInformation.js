@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
-import './PatientInformation.css'; 
 
 const patientData = {
     1: { name: 'John Doe', gender: 'Male', age: 30, contact: '123-456-7890', history: [
@@ -39,6 +38,10 @@ function PatientInformation() {
         navigate('/profile');
     };
 
+    const handleBackToPersonalInfo = () => {
+        navigate('/personal-information');
+    };
+
     const handleCreateTest = () => {
         alert(`Test created with name: ${testName}, symptoms: ${symptoms}, doctor: ${doctor}`);
         setShowCreateTest(false);
@@ -47,34 +50,64 @@ function PatientInformation() {
         setDoctor('');
     };
 
-    const handleLogout = () => {
-        console.log('Logging out');
-        navigate('/login');
-    };
-
-    const handleGoToPersonalInfo = () => {
-        console.log('Navigating to Doctor Information');
-        navigate('/personal-information');
-    };
-
     if (!patient) {
         return <div>Patient not found</div>;
     }
 
     return (
         <div>
-            <NavBar 
-                page="information"
-                onLogout={handleLogout}
-                onGoToPersonalInfo={handleGoToPersonalInfo}
-            />
-            <img src="/brand-ye.png" alt="Brand Logo" className='header-logo1' />
+            <NavBar page="information" />
             <h2>Patient Information</h2>
-            <button className='button-back' onClick={handleBackToProfile}>Back to Profile Management</button>
-           
-            <div className='input-text'>
+            <button onClick={handleBackToProfile}>Back to Profile Management</button>
+            <button onClick={handleBackToPersonalInfo}>Back to Personal Information</button>
+            <div>
+                <h3>Personal Information</h3>
+                <p><strong>Name:</strong> {patient.name}</p>
+                <p><strong>Gender:</strong> {patient.gender}</p>
+                <p><strong>Age:</strong> {patient.age}</p>
+                <p><strong>Contact:</strong> {patient.contact}</p>
+            </div>
+            <div>
+                <h3>Consultation History</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Test Name</th>
+                            <th>Symptoms</th>
+                            <th>Status</th>
+                            <th>Result</th>
+                            <th>Suggestion</th>
+                            <th>Doctor</th> {/* 新增的医生列 */}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {patient.history.map((record, index) => (
+                            <tr key={index}>
+                                <td>{record.date}</td>
+                                <td>{record.testName}</td>
+                                <td>{record.symptoms}</td>
+                                <td>{record.status}</td>
+                                <td>
+                                    <button onClick={() => handleResultClick(record)}>
+                                        {record.result}
+                                    </button>
+                                </td>
+                                <td>
+                                    <button onClick={() => handleSuggestionClick(record)}>
+                                        {record.suggestion}
+                                    </button>
+                                </td>
+                                <td>{record.doctor}</td> {/* 显示医生名字 */}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <button onClick={() => setShowCreateTest(true)}>Create Test</button>
+            </div>
+
             {showCreateTest && (
-                <div >
+                <div>
                     <h3>Create New Test</h3>
                     <label>
                         Test Name:
@@ -107,56 +140,6 @@ function PatientInformation() {
                     <button onClick={() => setShowCreateTest(false)}>Cancel</button>
                 </div>
             )}
- </div>
-
-            <div className='info-no'>
-            <img src="/头像 .png" alt="头像" className='tou-logo1' />
-                <h3>Personal Information</h3>
-                <p><strong>Name:</strong> {patient.name}</p >
-                <p><strong>Gender:</strong> {patient.gender}</p >
-                <p><strong>Age:</strong> {patient.age}</p >
-                <p><strong>Contact:</strong> {patient.contact}</p >
-            </div>
-            <div className='History-container'>
-                <h3>Consultation History</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Test Name</th>
-                            <th>Symptoms</th>
-                            <th>Status</th>
-                            <th>Result</th>
-                            <th>Suggestion</th>
-                            <th>Doctor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {patient.history.map((record, index) => (
-                            <tr key={index}>
-                                <td>{record.date}</td>
-                                <td>{record.testName}</td>
-                                <td>{record.symptoms}</td>
-                                <td>{record.status}</td>
-                                <td>
-                                    <button onClick={() => handleResultClick(record)}>
-                                        {record.result}
-                                    </button>
-                                </td>
-                                <td>
-                                    <button onClick={() => handleSuggestionClick(record)}>
-                                        {record.suggestion}
-                                    </button>
-                                </td>
-                                <td>{record.doctor}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <button className='button-create' onClick={() => setShowCreateTest(true)}>Create Test</button>
-            </div>
-
-           
         </div>
     );
 }

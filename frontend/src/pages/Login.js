@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css'; // 引入外部 CSS 文件
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -35,40 +34,26 @@ function Login() {
         navigate('/register');
     };
 
-    const handleAdminLogin = () => {
-        // 这里是管理员登录的逻辑
-        console.log('Admin login button clicked');
-    };
-
     return (
         <div>
-
-            <div className="login-container">
-        <img src="./people1.png" alt="People" className="people-image" />
-        <img src="./brand-ye.png" alt="Brand" className="brand-image"/>
-  
+            <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <input
                     type="text"
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="login-input username-input"
                 />
                 <input
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="login-input password-input"
                 />
-                 <button onClick={handleLogin} className="login-button">登录</button>
+                <button type="submit">Login</button>
             </form>
-            <div className='regist'>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-             <button onClick={handleNavigateToRegister} className="Register-button" >注册</button>
-            </div>
-        </div>
+            <p>Creat a new account?(only admin) <button onClick={handleNavigateToRegister}>Register here</button></p>
         </div>
     );
 }
