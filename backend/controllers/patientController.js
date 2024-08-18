@@ -44,7 +44,6 @@ router.get('/patients/:id', async (req, res) => {
 =======
 
 
-
 // 获取所有患者的详细信息
 exports.getPatientInfo = async (req, res) => {
     try {
@@ -56,18 +55,19 @@ exports.getPatientInfo = async (req, res) => {
     }
 };
 
+
 // 根据 patientlist_id 获取特定患者的详细信息
-exports.getPatientById = async (req, res) => {
-    const { patientId } = req.params;
+exports.getPatientInfoById = async (req, res) => {
+    const { patientlist_id } = req.params;
 
     try {
-        const result = await pool.query('SELECT * FROM patientlist WHERE id = $1', [patientId]);
+        const result = await pool.query('SELECT * FROM patient_info WHERE patientlist_id = $1', [patientlist_id]);
         if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Patient not found' });
+            return res.status(404).json({ message: 'Patient information not found' });
         }
-        res.json(result.rows[0]);
+        res.json(result.rows);
     } catch (err) {
-        console.error('Error fetching patient by ID:', err);
+        console.error('Error fetching patient information by ID:', err);
         res.status(500).json({ message: 'Server error' });
     }
 };
@@ -87,5 +87,9 @@ exports.addPatientInfo = async (req, res) => {
         console.error('Error adding patient information:', err);
         res.status(500).json({ message: 'Server error' });
     }
+<<<<<<< HEAD
 };
 >>>>>>> 087bad4e (test)
+=======
+};
+>>>>>>> f07d5879 (add patient_info api)
