@@ -7,8 +7,7 @@ function Login() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+    const handleLogin = async () => {
         try {
             const response = await fetch('http://localhost:5001/api/auth/login', {
                 method: 'POST',
@@ -21,39 +20,44 @@ function Login() {
             const data = await response.json();
 
             if (response.ok) {
-                navigate('/profile'); // 登录成功后跳转到档案管理页面
+                // 根据用户角色导航到不同页面
+                if (data.user.role === 'Admin') {
+                    navigate('/admin-management'); // 管理员页面
+                } else {
+                    navigate('/profile'); // 普通用户页面
+                }
             } else {
-                setError(data.message);
+                setError(data.message || 'Login failed');
             }
         } catch (err) {
-            setError('Something went wrong. Please try again.');
+            console.error('Error logging in:', err);
+            setError('An error occurred while logging in. Please try again.');
         }
-    };
-
-    const handleNavigateToRegister = () => {
-        navigate('/register');
     };
 
     return (
         <div>
             <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <p>Creat a new account?(only admin) <button onClick={handleNavigateToRegister}>Register here</button></p>
+            <label>
+                Username:
+                <input 
+                    type="text" 
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)} 
+                />
+            </label>
+            <br />
+            <label>
+                Password:
+                <input 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                />
+            </label>
+            <br />
+            <button onClick={handleLogin}>Login</button>
         </div>
     );
 }

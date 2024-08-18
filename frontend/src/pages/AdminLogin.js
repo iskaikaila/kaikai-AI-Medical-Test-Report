@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AdminLogin() {
+function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleAdminLogin = async () => {
+    const handleLogin = async () => {
+        if (!username || !password) {
+            setError('Username and password are required');
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:5001/api/auth/login', {
                 method: 'POST',
@@ -18,24 +24,28 @@ function AdminLogin() {
 
             const data = await response.json();
 
-            if (response.ok) {
-                if (data.user.role === 'Admin') {
-                    navigate('/admin-management'); // 管理员管理页面
+            if (response.ok && data.user) {
+                // 根据用户角色导航到不同页面
+                if (data.user.role === 'admin') {
+                    navigate('/admin-management'); // 管理员页面
                 } else {
-                    alert('You do not have admin privileges.');
+                    navigate('/profile'); // 普通用户页面
                 }
             } else {
-                alert(data.message || 'Login failed');
+                setError(data.message || 'Login failed');
             }
         } catch (err) {
             console.error('Error logging in:', err);
-            alert('An error occurred while logging in. Please try again.');
+            setError('An error occurred while logging in. Please try again.');
         }
     };
+
+
 
     return (
         <div>
             <h2>Admin Login</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <label>
                 Username:
                 <input 
@@ -54,9 +64,11 @@ function AdminLogin() {
                 />
             </label>
             <br />
-            <button onClick={handleAdminLogin}>Login</button>
+            <button onClick={handleLogin}>Login</button>
+            <br /><br />
+
         </div>
     );
 }
 
-export default AdminLogin;
+export default Login;
