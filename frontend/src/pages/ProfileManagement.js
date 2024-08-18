@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 
-const sampleData = [
-    { id: 1, name: 'John Doe', age: 30, gender: 'Male', testDetails: 'Blood Test - 2024-08-01' },
-    { id: 2, name: 'Jane Smith', age: 28, gender: 'Female', testDetails: 'X-Ray - 2024-08-02' },
-    { id: 3, name: 'Bob Johnson', age: 45, gender: 'Male', testDetails: 'MRI - 2024-08-03' },
-];
-
 function ProfileManagement() {
+    const [patients, setPatients] = useState([]);
     const [searchField, setSearchField] = useState('name');
     const [searchTerm, setSearchTerm] = useState('');
     const [sortKey, setSortKey] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
-    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [newPatient, setNewPatient] = useState({
         name: '',
         age: '',
@@ -21,6 +17,20 @@ function ProfileManagement() {
         testDetails: ''
     });
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // 从数据库获取患者数据
+        const fetchPatients = async () => {
+            try {
+                const response = await axios.get('http://localhost:5001/api/patients');
+                setPatients(response.data);
+            } catch (error) {
+                console.error('Error fetching patients:', error);
+            }
+        };
+
+        fetchPatients();
+    }, []);
 
     const handleSearchFieldChange = (event) => {
         setSearchField(event.target.value);
@@ -55,27 +65,23 @@ function ProfileManagement() {
         setNewPatient({ ...newPatient, [e.target.name]: e.target.value });
     };
 
-    const handleAddPatient = () => {
-        // 这里可以处理将新患者添加到数据库的逻辑
-        console.log('New patient added:', newPatient);
-
-        // 清空表单并关闭模态框
-        setNewPatient({ name: '', age: '', gender: '', testDetails: '' });
-        handleCloseModal();
+    const handleAddPatient = async () => {
+        try {
+            const response = await axios.post('http://localhost:5001/api/patients', {
+                name: newPatient.name,
+                age: newPatient.age,
+                gender: newPatient.gender,
+                test_details: newPatient.testDetails  // 使用正确的字段名
+            });
+            setPatients([...patients, response.data]);
+            setNewPatient({ name: '', age: '', gender: '', testDetails: '' });
+            handleCloseModal();
+        } catch (error) {
+            console.error('Error adding patient:', error);
+        }
     };
 
-    // 处理退出登录
-    const handleLogout = () => {
-        // 处理退出登录逻辑，如清除 token 或重定向到登录页面
-        navigate('/login');
-    };
-
-    // 处理跳转到医生用户信息页面
-    const handleGoToPersonalInfo = () => {
-        navigate('/personal-information');
-    };
-
-    const filteredData = sampleData
+    const filteredData = patients
         .filter(patient => {
             if (searchField === 'id' || searchField === 'age') {
                 return patient[searchField].toString().includes(searchTerm);
@@ -97,11 +103,11 @@ function ProfileManagement() {
         <div>
             <NavBar
                 page="profile"
-                onLogout={handleLogout}
-                onGoToPersonalInfo={handleGoToPersonalInfo}
+                onLogout={() => navigate('/login')}
+                onGoToPersonalInfo={() => navigate('/personal-information')}
             />
             <h2>Profile Management</h2>
-            <button onClick={handleOpenModal}>Add Patient</button> 
+            <button onClick={handleOpenModal}>Add Patient</button>
             <div>
                 <label htmlFor="searchField">Search by:</label>
                 <select id="searchField" value={searchField} onChange={handleSearchFieldChange}>
@@ -136,7 +142,7 @@ function ProfileManagement() {
                             <td>{patient.gender}</td>
                             <td>
                                 <button onClick={() => handleViewDetails(patient.id)}>
-                                    {patient.testDetails}
+                                  {patient.test_details}
                                 </button>
                             </td>
                         </tr>
@@ -144,7 +150,6 @@ function ProfileManagement() {
                 </tbody>
             </table>
 
-            {/* 模态框 */}
             {isModalOpen && (
                 <div className="modal">
                     <div className="modal-content">
