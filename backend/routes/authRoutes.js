@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, login } = require('../authController');
+const { registerUser, login, getUsers, deleteUser } = require('../authController');
 
 const router = express.Router();
 
@@ -9,4 +9,10 @@ router.post('/admin/register', registerUser);
 // 用户登录
 router.post('/login', login);
 
+router.get('/users', getUsers);
+
+// 删除用户
+router.delete('/admin/users/:id', deleteUser);
+
 module.exports = router;
+
