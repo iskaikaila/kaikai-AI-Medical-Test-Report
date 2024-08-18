@@ -101,7 +101,7 @@ function ProfileManagement() {
                 onGoToPersonalInfo={handleGoToPersonalInfo}
             />
             <h2>Profile Management</h2>
-            <button onClick={handleOpenModal}>Add Patient</button> {/* 添加信息按钮 */}
+            <button onClick={handleOpenModal}>Add Patient</button> 
             <div>
                 <label htmlFor="searchField">Search by:</label>
                 <select id="searchField" value={searchField} onChange={handleSearchFieldChange}>

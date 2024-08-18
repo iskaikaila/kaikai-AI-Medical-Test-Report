@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function AdminLogin() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
+    const handleAdminLogin = async () => {
         try {
             const response = await fetch('http://localhost:5001/api/auth/login', {
                 method: 'POST',
@@ -20,25 +19,23 @@ function Login() {
             const data = await response.json();
 
             if (response.ok) {
-                // 根据用户角色导航到不同页面
                 if (data.user.role === 'Admin') {
-                    navigate('/admin-management'); // 管理员页面
+                    navigate('/admin-management'); // 管理员管理页面
                 } else {
-                    navigate('/profile'); // 普通用户页面
+                    alert('You do not have admin privileges.');
                 }
             } else {
-                setError(data.message || 'Login failed');
+                alert(data.message || 'Login failed');
             }
         } catch (err) {
             console.error('Error logging in:', err);
-            setError('An error occurred while logging in. Please try again.');
+            alert('An error occurred while logging in. Please try again.');
         }
     };
 
     return (
         <div>
-            <h2>Login</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <h2>Admin Login</h2>
             <label>
                 Username:
                 <input 
@@ -57,9 +54,9 @@ function Login() {
                 />
             </label>
             <br />
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleAdminLogin}>Login</button>
         </div>
     );
 }
 
-export default Login;
+export default AdminLogin;

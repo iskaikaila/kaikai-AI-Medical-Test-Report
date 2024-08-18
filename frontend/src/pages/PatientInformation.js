@@ -38,10 +38,6 @@ function PatientInformation() {
         navigate('/profile');
     };
 
-    const handleBackToPersonalInfo = () => {
-        navigate('/personal-information');
-    };
-
     const handleCreateTest = () => {
         alert(`Test created with name: ${testName}, symptoms: ${symptoms}, doctor: ${doctor}`);
         setShowCreateTest(false);
@@ -50,16 +46,29 @@ function PatientInformation() {
         setDoctor('');
     };
 
+    const handleLogout = () => {
+        console.log('Logging out');
+        navigate('/login');
+    };
+
+    const handleGoToPersonalInfo = () => {
+        console.log('Navigating to Doctor Information');
+        navigate('/personal-information');
+    };
+
     if (!patient) {
         return <div>Patient not found</div>;
     }
 
     return (
         <div>
-            <NavBar page="information" />
+            <NavBar 
+                page="information"
+                onLogout={handleLogout}
+                onGoToPersonalInfo={handleGoToPersonalInfo}
+            />
             <h2>Patient Information</h2>
             <button onClick={handleBackToProfile}>Back to Profile Management</button>
-            <button onClick={handleBackToPersonalInfo}>Back to Personal Information</button>
             <div>
                 <h3>Personal Information</h3>
                 <p><strong>Name:</strong> {patient.name}</p>
@@ -78,7 +87,7 @@ function PatientInformation() {
                             <th>Status</th>
                             <th>Result</th>
                             <th>Suggestion</th>
-                            <th>Doctor</th> {/* 新增的医生列 */}
+                            <th>Doctor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,7 +107,7 @@ function PatientInformation() {
                                         {record.suggestion}
                                     </button>
                                 </td>
-                                <td>{record.doctor}</td> {/* 显示医生名字 */}
+                                <td>{record.doctor}</td>
                             </tr>
                         ))}
                     </tbody>

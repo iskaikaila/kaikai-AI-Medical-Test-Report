@@ -1,10 +1,12 @@
 const express = require('express');
-const { register, login } = require('../authController');
+const { registerUser, login } = require('../authController');
 
 const router = express.Router();
 
-router.post('/register', register);
+// 用户注册
+router.post('/admin/register', registerUser);
+
+// 用户登录
 router.post('/login', login);
 
 module.exports = router;
-

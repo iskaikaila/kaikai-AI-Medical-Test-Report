@@ -8,6 +8,8 @@ import ProfileManagement from './pages/ProfileManagement';
 import PatientInformation from './pages/PatientInformation';  
 import UploadMedicalFiles from './pages/UploadMedicalFiles';
 import ResultsSuggestions from './pages/ResultsSuggestions'; 
+import AdminLogin from './pages/AdminLogin'; 
+import AdminManagement from './pages/AdminManagement'; 
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
                     <Route path="/upload-medical-files/:id/:type" element={<UploadMedicalFiles />} /> 
                     <Route path="/results-suggestions/:id/:type" element={<ResultsSuggestions />} /> 
                     <Route path="/" element={<Navigate to="/login" />} />
+                    <Route path="/admin-login" element={<AdminLogin />} />
+                    <Route path="/admin-management" element={<AdminManagement />} />  
                 </Routes>
             </div>
         </Router>
