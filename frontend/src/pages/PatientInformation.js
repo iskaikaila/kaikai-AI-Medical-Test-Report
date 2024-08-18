@@ -27,11 +27,11 @@ function PatientInformation() {
     const [doctor, setDoctor] = useState('');
 
     const handleResultClick = (record) => {
-        navigate(`/upload-medical-files/${id}/${record.testName}`);
+        navigate(`/personal-information/${id}/${record.testName}`);
     };
 
     const handleSuggestionClick = (record) => {
-        navigate(`/results-suggestions/${id}/${record.testName}`);
+        navigate(`/personal-information/${id}/${record.testName}`);
     };
 
     const handleBackToProfile = () => {

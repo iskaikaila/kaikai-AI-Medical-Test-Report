@@ -7,3 +7,4 @@ router.get('/', getPatients);
 router.post('/', addPatient);
 
 module.exports = router;
+

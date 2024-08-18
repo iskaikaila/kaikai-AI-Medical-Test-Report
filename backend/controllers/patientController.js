@@ -20,9 +20,23 @@ exports.addPatient = async (req, res) => {
             'INSERT INTO patientlist (name, age, gender, test_details) VALUES ($1, $2, $3, $4) RETURNING *',
             [name, age, gender, test_details]
         );
-        res.status(201).json(result.rows[0]);
+        res.status(201).json(result.rows[0]); 
     } catch (err) {
         console.error('Error adding patient:', err);
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+router.get('/patients/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const patient = await pool.query('SELECT * FROM patients WHERE id = $1', [id]);
+        if (patient.rows.length === 0) {
+            return res.status(404).json({ message: 'Patient not found' });
+        }
+        res.json(patient.rows[0]);
+    } catch (error) {
+        console.error('Error fetching patient:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});

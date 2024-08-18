@@ -16,10 +16,10 @@ function ProfileManagement() {
         gender: '',
         testDetails: ''
     });
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
-        // 从数据库获取患者数据
         const fetchPatients = async () => {
             try {
                 const response = await axios.get('http://localhost:5001/api/patients');
@@ -49,6 +49,8 @@ function ProfileManagement() {
         setSortOrder(order);
     };
 
+
+
     const handleViewDetails = (patientId) => {
         navigate(`/patient/${patientId}`);
     };
@@ -63,16 +65,32 @@ function ProfileManagement() {
 
     const handleInputChange = (e) => {
         setNewPatient({ ...newPatient, [e.target.name]: e.target.value });
+        setErrors({ ...errors, [e.target.name]: '' }); // 清除当前字段的错误信息
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!newPatient.name) newErrors.name = 'Name is required';
+        if (!newPatient.age) newErrors.age = 'Age is required';
+        if (!newPatient.gender) newErrors.gender = 'Gender is required';
+        if (!newPatient.testDetails) newErrors.testDetails = 'Test Details are required';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0; // 如果没有错误，返回 true
     };
 
     const handleAddPatient = async () => {
+        if (!validateForm()) return;
+
         try {
             const response = await axios.post('http://localhost:5001/api/patients', {
                 name: newPatient.name,
                 age: newPatient.age,
                 gender: newPatient.gender,
-                test_details: newPatient.testDetails  // 使用正确的字段名
+                test_details: newPatient.testDetails
             });
+
             setPatients([...patients, response.data]);
             setNewPatient({ name: '', age: '', gender: '', testDetails: '' });
             handleCloseModal();
@@ -130,7 +148,7 @@ function ProfileManagement() {
                         <th onClick={() => handleSort('name')}>Patient Name {sortKey === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
                         <th onClick={() => handleSort('age')}>Age {sortKey === 'age' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
                         <th onClick={() => handleSort('gender')}>Gender {sortKey === 'gender' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('testDetails')}>Test Details {sortKey === 'testDetails' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                        <th onClick={() => handleSort('testDetails')}>More Details {sortKey === 'testDetails' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,7 +160,7 @@ function ProfileManagement() {
                             <td>{patient.gender}</td>
                             <td>
                                 <button onClick={() => handleViewDetails(patient.id)}>
-                                  {patient.test_details}
+                                    {patient.test_details}
                                 </button>
                             </td>
                         </tr>
@@ -164,6 +182,7 @@ function ProfileManagement() {
                                     onChange={handleInputChange}
                                     required
                                 />
+                                {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
                             </div>
                             <div>
                                 <label>Age:</label>
@@ -174,6 +193,7 @@ function ProfileManagement() {
                                     onChange={handleInputChange}
                                     required
                                 />
+                                {errors.age && <p style={{ color: 'red' }}>{errors.age}</p>}
                             </div>
                             <div>
                                 <label>Gender:</label>
@@ -188,6 +208,7 @@ function ProfileManagement() {
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
                                 </select>
+                                {errors.gender && <p style={{ color: 'red' }}>{errors.gender}</p>}
                             </div>
                             <div>
                                 <label>Test Details:</label>
@@ -198,6 +219,7 @@ function ProfileManagement() {
                                     onChange={handleInputChange}
                                     required
                                 />
+                                {errors.testDetails && <p style={{ color: 'red' }}>{errors.testDetails}</p>}
                             </div>
                             <div>
                                 <button type="button" onClick={handleAddPatient}>Add Patient</button>
