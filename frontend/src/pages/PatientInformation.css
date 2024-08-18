@@ -1,0 +1,82 @@
+/* brand-ye图片的CSS */
+.header-logo1 {
+    position: relative;
+    left: 60px;
+    top: 15px;    
+    width: 180px;
+    height: 120px;
+    opacity: 1;
+    background: rgba(29, 33, 41, 1);
+}
+
+h2 {
+    position: relative;
+    top: -40px;  
+    left: 60px;
+}
+
+.tou-logo1 {
+    position: relative;
+    top: -40px;  
+    left: -110px;
+}
+
+.button-back {
+    position: relative;
+    top: -45px;  
+    left: 1390px;
+}
+
+.info-no {
+    position: relative;
+    top: 15px;
+    left: 180px;
+}
+
+.info-no h3 {
+    position: relative;
+    top: -315px;
+    left: 380px;
+}
+
+.info-no p {
+    position: relative;
+    top: -315px;
+    left: 380px;
+}
+
+.History-container h3 {
+    position: relative;
+    top: -215px;
+    left: 560px;
+}
+
+.History-container table {
+    position: relative;
+    top: -215px;
+    left: 560px;
+}
+
+.input-text {
+    position: relative;
+    top: -45px;
+    left: 1390px;
+}
+.input-text h3{
+    top: 75px;
+}
+.input-text label {
+    position: relative;
+    top: 115px;
+    left: 20px;
+}
+.input-text button {
+    position: relative;
+    top: 115px;
+    left: 20px;
+}
+.button-create{
+    position: relative;
+    top: -745px;
+    left: 1590px;
+}

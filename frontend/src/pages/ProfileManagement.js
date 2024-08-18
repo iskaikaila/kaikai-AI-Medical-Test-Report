@@ -102,122 +102,119 @@ function ProfileManagement() {
                 onGoToPersonalInfo={handleGoToPersonalInfo}
             />
             <h3>Profile Management</h3>
-            <header>
-                <img src="/brand-ye.png" alt="Brand Logo" className='header-logo' />
-                <div className="header-text">Welcome to Medixal</div>
-            </header>
-           
-           
-            <button className='button-Add-Patient' onClick={handleOpenModal}>Add Patient</button> {/* 添加信息按钮 */}
-           
-            <div className='searchField'>
-                <label htmlFor="searchField">Search by:</label>
-                <select id="searchField" value={searchField} onChange={handleSearchFieldChange}>
-                    <option value="name">Patient Name</option>
-                    <option value="id">Patient ID</option>
-                    <option value="age">Age</option>
-                    <option value="gender">Gender</option>
-                </select>
-                <input
-                    type="text"
-                    placeholder={`Search by ${searchField}...`}
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </div>
+<header>
+<img src="/brand-ye.png" alt="Brand Logo" className='header-logo' />
+<div className="header-text">Welcome to Medixal</div>
+</header>
 
-            {/* 添加患者的弹出框 */}
-
-   
-          
-            <table>
-                <thead>
-                    <tr>
-                        <th onClick={() => handleSort('id')}>Patient ID {sortKey === 'id' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('name')}>Patient Name {sortKey === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('age')}>Age {sortKey === 'age' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('gender')}>Gender {sortKey === 'gender' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                        <th onClick={() => handleSort('testDetails')}>Test Details {sortKey === 'testDetails' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredData.map((patient) => (
-                        <tr key={patient.id}>
-                            <td>{patient.id}</td>
-                            <td>{patient.name}</td>
-                            <td>{patient.age}</td>
-                            <td>{patient.gender}</td>
-                            <td>
-                                <button onClick={() => handleViewDetails(patient.id)}>
-                                    {patient.testDetails}
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            {/* 模态框 */}
-            {isModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>Add New Patient</h2>
-                        <form>
-                            <div>
-                                <label>Name:</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={newPatient.name}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label>Age:</label>
-                                <input
-                                    type="number"
-                                    name="age"
-                                    value={newPatient.age}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label>Gender:</label>
-                                <select
-                                    name="gender"
-                                    value={newPatient.gender}
-                                    onChange={handleInputChange}
-                                    required
-                                >
-                                    <option value="">Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Test Details:</label>
-                                <input
-                                    type="text"
-                                    name="testDetails"
-                                    value={newPatient.testDetails}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <button type="button" onClick={handleAddPatient}>Add Patient</button>
-                                <button type="button" onClick={handleCloseModal}>Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
-        </div>
+        <button className='button-Add-Patient' onClick={handleOpenModal}>Add Patient</button> {/* 添加信息按钮 */}
        
-    );
+        <div className='searchtext'>
+            <label htmlFor="searchField">Search by:</label>
+            <select id="searchField" value={searchField} onChange={handleSearchFieldChange}>
+                <option value="name">Patient Name</option>
+                <option value="id">Patient ID</option>
+                <option value="age">Age</option>
+                <option value="gender">Gender</option>
+            </select>
+            <input
+                type="text"
+                placeholder={`Search by ${searchField}...`}
+                value={searchTerm}
+                onChange={handleSearch}
+            />
+        </div>
+
+        {/* 患者的表格 */}
+        <table className='table-container'>
+            <thead>
+                <tr>
+                    <th onClick={() => handleSort('id')}>Patient ID {sortKey === 'id' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                    <th onClick={() => handleSort('name')}>Patient Name {sortKey === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                    <th onClick={() => handleSort('age')}>Age {sortKey === 'age' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                    <th onClick={() => handleSort('gender')}>Gender {sortKey === 'gender' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                    <th onClick={() => handleSort('testDetails')}>Test Details {sortKey === 'testDetails' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {filteredData.map((patient) => (
+                    <tr key={patient.id}>
+                        <td>{patient.id}</td>
+                        <td>{patient.name}</td>
+                        <td>{patient.age}</td>
+                        <td>{patient.gender}</td>
+                        <td>
+                            <button onClick={() => handleViewDetails(patient.id)}>
+                                {patient.testDetails}
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+
+        {/* 模态框 */}
+        {isModalOpen && (
+            <div className={`modal ${isModalOpen ? 'show' : ''}`}>
+                <div className="modal-content">
+                <img src="/brand-ye.png" alt="Brand Logo" className='modal-content-logo' />
+                    <h2>Add New Patient</h2>
+                    <form>
+                        <div>
+                            <label>Name:</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={newPatient.name}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Age:</label>
+                            <input
+                                type="number"
+                                name="age"
+                                value={newPatient.age}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Gender:</label>
+                            <select
+                                name="gender"
+                                value={newPatient.gender}
+                                onChange={handleInputChange}
+                                required
+                            >
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Test Details:</label>
+                            <input
+                                type="text"
+                                name="testDetails"
+                                value={newPatient.testDetails}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <button type="button" onClick={handleAddPatient}>Add Patient</button>
+                            <button type="button" onClick={handleCloseModal}>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        )}
+    </div>
+);
 }
 
 export default ProfileManagement;
+

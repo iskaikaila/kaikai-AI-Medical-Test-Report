@@ -1,0 +1,40 @@
+/* brand-ye图片的CSS */
+.header-logo1 {
+    position: relative;
+    left: 60px;
+    top: -75px;    
+    width: 180px;
+    height:120px;
+    opacity: 1;
+    background: rgba(29, 33, 41, 1);
+  }
+
+  /* Welcome to Medixal文本的CSS */
+  .header-text1 {
+    position: relative;
+    left: 50px;
+    top: -36px;
+    width: 350px;
+    height: 48px;
+    opacity: 1;
+    /** 文本1 */
+    font-size: 35px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 21.6px;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .container{
+    position: relative;
+    left: 50px;
+    top: 80px;
+  }
+
+  .information-container{
+    position: relative;
+    left: 50px;
+    top:-10px;
+  }

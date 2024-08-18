@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Register.css'; 
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -32,8 +33,9 @@ function Register() {
 
     return (
         <div>
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
+             <img src="/brand-ye.png" alt="Brand Logo" className='header-logo1' />
+             <h2 className="register-title">Register</h2>
+            <form onSubmit={handleRegister} className="register-content">
                 <input
                     type="text"
                     placeholder="Username"

@@ -1,0 +1,75 @@
+.header-logo1 {
+  position: relative;
+  left: 60px;
+  top: 25px;    
+  width: 180px;
+  height: 120px;
+  opacity: 1;
+  background: rgba(29, 33, 41, 1);
+}
+
+.big-container h2 {
+  position: relative;
+  top: -75px;    
+  left: 390px;
+}
+
+.button-back-to-Patient-Details {
+  position: relative;
+  top: -125px;  
+  left: 990px;
+}
+
+.uploaded-files-heading {
+  background: rgba(3, 134, 125, 1);
+  color: white; /* 如果需要，还可以设置文字颜色 */
+  padding: 10px; /* 可选：增加一些内边距 */
+  border-radius: 5px; /* 可选：增加一些圆角 */
+}
+
+.big-container {
+  padding: 20px;
+}
+
+.frame-upload-info1, .frame-upload-info2, .frame-upload-info3 {
+  margin-left: 40px; /* 通过增加左边距来向右移动，调整这个值以控制右移的距离 */
+}
+
+
+.report-container h3{
+  position: relative;
+  top: 15px;    
+  left:890px;
+}
+
+.report-container input {
+  display: block;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.report-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.report-buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 1em;
+}
+
+.report-buttons button:hover {
+  background-color: #0056b3;
+}

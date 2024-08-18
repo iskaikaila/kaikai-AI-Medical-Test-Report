@@ -1,36 +1,48 @@
- /* 导航栏的CSS */
- .navbar {
-  position: absolute;
-  right: 0;
-  top: 40px;
-  width: 428px;
-  height: 44px;
-  opacity: 1;
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: 21.6px;
-  color: rgba(0, 0, 0, 1);
-  text-align: center;
-  vertical-align: middle;
-}
-
+/* NavBar.css */
+.navbar {
+    position: absolute;
+    left: 377px;
+    top: -55px;    
+    width: 428px;
+    height: 44px; 
+    opacity: 1;  
+    font-size: 18px; 
+    font-weight: 400;
+    letter-spacing: 0px; 
+    line-height: 21.6px; 
+    color: rgba(0, 0, 0, 1);
+    text-align: center; 
+    vertical-align: middle; 
+    display: flex; /* 使用Flexbox布局 */
+    justify-content: space-between; /* 按钮之间平均分布空间 */
+    align-items: center; /* 垂直居中对齐 */
+    padding: 0 10px; /* 导航栏内边距 */
+  }
+  
   .navbar ul {
     list-style-type: none; /* 移除列表项的默认样式 */
-    padding: 0;
     margin: 0;
-    display: flex; /* 使用 Flexbox 布局 */
-    justify-content: flex-start; /* 项目在主轴（默认为水平方向）上居左排列 */
-}
-
-.navbar li {
-    margin-right: 45px; /* 右侧外边距 */
-}
-
-.navbar li:first-child {
-    margin-left: 20px; /* 左侧外边距 */
-}
-
-.navbar li:last-child {
-    margin-right: 20px; /* 右侧外边距 */
-}
+    padding: 0;
+    display: flex; /* 使用Flexbox布局 */
+    width: 100%; /* 使ul占满整个导航栏宽度 */
+    justify-content: space-around; /* 按钮在水平方向上均匀分布 */
+  }
+  
+  .navbar li {
+    margin: 0; /* 移除li的外边距 */
+  }
+  
+  .navbar button {
+    background: none; /* 按钮背景透明 */
+    border: none; /* 按钮无边框 */
+    cursor: pointer; /* 鼠标悬停时显示指针手势 */
+    color: inherit; /* 文字颜色继承自父元素 */
+    font: inherit; /* 字体样式继承自父元素 */
+    text-align: center; /* 文字居中对齐 */
+    padding: 5px 15px; /* 按钮内边距 */
+  }
+  
+  /* 可以添加按钮悬停效果 */
+  .navbar button:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* 鼠标悬停时按钮背景轻微变暗 */
+  }

@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from './NavBar';
+import './PersonalInformation.css'; 
 
 function PersonalInformation() {
 
@@ -12,9 +13,13 @@ function PersonalInformation() {
     };
 
     return (
-        <div>
+        <div className='container'>
             <NavBar />
-            <div>
+            <header>
+                <img src="/brand-ye.png" alt="Brand Logo" className='header-logo1' />
+                <div className="header-text1">Welcome to Medixal</div>
+            </header>
+            <div className='information-container'>
                 <h2>Doctor's Personal Information</h2>
                 <p><strong>Name:</strong> {doctorInfo.name}</p>
                 <p><strong>Email:</strong> {doctorInfo.email}</p>
