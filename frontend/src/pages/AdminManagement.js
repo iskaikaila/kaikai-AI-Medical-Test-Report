@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminManagement.css';  // Ensure this is linked correctly
 import userIcon from './images/形状.png';
-import expandIcon from './images/展开.png';
 import brandText from './images/brand.png';
 import brandLeaf from './images/tree-2.png';
 import adminTitle from './images/管理员管理界面.png';
@@ -51,24 +50,24 @@ function AdminManagement() {
         const newErrors = {};
 
         if (!newUser.id) {
-            newErrors.id = 'ID is required.';
+            newErrors.id = 'ID是必需的。'; // ID is required.
         }
         if (!newUser.username) {
-            newErrors.username = 'Username is required.';
+            newErrors.username = '用户名是必需的。'; // Username is required.
         }
         if (!newUser.password) {
-            newErrors.password = 'Password is required.';
+            newErrors.password = '密码是必需的。'; // Password is required.
         } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(newUser.password)) {
-            newErrors.password = 'Password must be at least 8 characters long and include uppercase, lowercase, and numbers.';
+            newErrors.password = '密码必须至少为8个字符，并包含大小写字母和数字。'; // Password must be at least 8 characters long and include uppercase, lowercase, and numbers.
         }
         if (!newUser.role) {
-            newErrors.role = 'Role is required.';
+            newErrors.role = '角色是必需的。'; // Role is required.
         }
         if (!/^\d+$/.test(newUser.phone)) {
-            newErrors.phone = 'Phone must be a numeric string.';
+            newErrors.phone = '电话必须是数字字符串。'; // Phone must be a numeric string.
         }
         if (!/\S+@\S+\.\S+/.test(newUser.email)) {
-            newErrors.email = 'Email must be a valid email address.';
+            newErrors.email = '邮箱地址无效。'; // Email must be a valid email address.
         }
 
         setErrors(newErrors);

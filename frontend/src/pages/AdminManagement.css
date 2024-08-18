@@ -123,11 +123,12 @@
 }
 
 /* Content of the modal */
+/* Modal content styling */
 .modal-content {
     background: white;
     padding: 15px;
     border-radius: 8px;
-    width: 320px;  /* Adjusted width to be more compact */
+    width: 400px;
     position: relative;
     border: 1px solid rgba(1, 133, 124, 1);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -137,43 +138,46 @@
 .modal-content h3 {
     text-align: center;
     margin-bottom: 10px;
-    font-size: 18px; /* Slightly smaller */
+    font-size: 18px;
 }
 
-/* Label styling within the modal */
+/* Label and input container */
 .modal-content label {
-    display: block;
+    display: flex;
+    flex-direction: column; /* Aligns label and input vertically */
+    align-items: center; /* Center the label and input */
     margin-bottom: 8px;
-    font-size: 14px;  /* Slightly smaller */
+    font-size: 14px;
 }
 
-/* Input and select fields within the modal */
+/* Input and select fields styling */
 .modal-content input,
 .modal-content select {
-    width: 100%;
-    padding: 6px;  /* Reduced padding */
+    width: 80%; /* Centers the input by reducing its width */
+    padding: 6px;
     margin-top: 4px;
     margin-bottom: 12px;
     border: 1px solid #CCC;
     border-radius: 4px;
-    font-size: 14px;  /* Slightly smaller */
+    font-size: 14px;
+    text-align: center; /* Center the text within the input field */
 }
 
 /* Buttons inside the modal */
 .modal-content button {
-    padding: 8px 15px;  /* Reduced padding */
+    padding: 8px 15px;
     background-color: rgba(1, 133, 124, 1);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 48%;  /* Smaller buttons */
-    margin-right: 2%;  /* Slight gap between buttons */
+    width: 48%;
+    margin-right: 2%;
     box-sizing: border-box;
 }
 
 .modal-content button:last-child {
-    margin-right: 0;  /* Remove margin for the last button */
+    margin-right: 0;
 }
 
 /* Close button for the modal */
@@ -181,7 +185,8 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 16px;  /* Smaller close button */
+    font-size: 16px;
     cursor: pointer;
     color: #333;
 }
+
