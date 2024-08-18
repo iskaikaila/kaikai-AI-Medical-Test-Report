@@ -18,17 +18,5 @@ router.post('/', addPatient);
 router.get('/patient-info', getPatientInfo); // Get all patient info
 router.get('/patient-info/:patientlist_id', getPatientInfoById); // Get patient info by patientlist_id
 router.post('/patient-info', addPatientInfo); // Add patient info
-<<<<<<< HEAD
-router.get('/:patientId', getPatientById);
 
 module.exports = router;
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 087bad4e (test)
-=======
-
-module.exports = router;
->>>>>>> f07d5879 (add patient_info api)
