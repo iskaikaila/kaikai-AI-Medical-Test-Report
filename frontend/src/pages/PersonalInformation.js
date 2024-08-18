@@ -14,7 +14,9 @@ function PersonalInformation() {
 
     return (
         <div className='container'>
-            <NavBar />
+            <div className='nav-container'>
+                <NavBar />
+            </div>
             <header>
                 <img src="/brand-ye.png" alt="Brand Logo" className='header-logo1' />
                 <div className="header-text1">Welcome to Medixal</div>

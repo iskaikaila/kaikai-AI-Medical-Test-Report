@@ -72,26 +72,42 @@ function UploadMedicalFiles() {
                 Back to Patient Details
             </button>
 
-            <div className='frame-upload-info1'>
-                <h3>Select files to upload:</h3>
-                <input type="file" multiple onChange={handleFileChange} />
-                <button onClick={handleUpload}>Upload Files</button>
-            </div>
+            <div className='upload-main-container'> {/* 新的父容器 */}
+                <div className='upload-wrapper'>
+                    <div className='frame-upload-info1'>
+                        <h3>Select files to upload:</h3>
+                        <input type="file" multiple onChange={handleFileChange} />
+                        <button onClick={handleUpload}>Upload Files</button>
+                    </div>
 
-            {uploadedFiles.length > 0 && (
-                <div className='frame-upload-info2'>
-                    <h3 className='uploaded-files-heading'>Uploaded Files:</h3>
-                    <ul>
-                        {uploadedFiles.map((file, index) => (
-                            <li key={index}>{file.name}</li>
-                        ))}
-                    </ul>
+                    <div className='frame-upload-info3'>
+                        <button onClick={handleGenerateResults} disabled={uploadedFiles.length === 0}>
+                            Generate Results
+                        </button>
+                    </div>
                 </div>
-            )}
-            <div className='frame-upload-info3'>
-                <button onClick={handleGenerateResults} disabled={uploadedFiles.length === 0}>
-                    Generate Results
-                </button>
+
+                <div className='uploaded-files-table'>
+                    <h3>Uploaded Files</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th>Upload Date</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {uploadedFiles.map((file, index) => (
+                                <tr key={index}>
+                                    <td>{file.name}</td>
+                                    <td>{new Date().toLocaleDateString()}</td>
+                                    <td>{(file.size / 1024).toFixed(2)} KB</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div className='report-container'>

@@ -1,175 +1,250 @@
-/*    设置网页背景颜色    */
-html  {
-    background:  rgba(255,  255,  255,  1);
+/* 设置网页背景颜色 */
+html, body {
+    background: rgba(255, 255, 255, 1);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/*    页面顶端容器样式    */
-#top-bar  {
-    width:  100%;
-    background:  rgba(255,  255,  255,  1);
+/* 页面顶端容器样式 */
+#top-bar {
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
 }
 
-.container  {
-    width: 1580px;
-    margin:  0  auto;
-    padding:  0  30px;  /*  添加一些内边距  */
-    display:  flex;
-    align-items:  center;
-    justify-content:  space-between;
-}
-#placeholder {
-    width: 580px;
-}
-.container  img  {
-    left: -50px;
-    top: 29.5px;
-    width: 150px;
-    height: 38px;
-    opacity: 1;
-    background: rgba(29, 33, 41, 1);
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-nav  ul  {
-    list-style:  none;
-    display:  flex;
-    align-items:  center;
+#placeholder {
+    flex-grow: 1;
 }
 
-nav  ul  li  {
-    margin-left:  10px;
+/* 固定 .header-logo 在页面左上角 */
+.header-logo {
+    position: absolute; /* 确保可以使用 left 属性 */
+    width: 180px;
+    height: 60px;
+    margin-left: -280px;
 }
 
-nav  ul  li  a  {
-    text-decoration:  none;
-    color:  black;
+nav {
+    margin-left: auto; /* 将 nav 整体向右移动 */
 }
 
-/*    页面顶端导航链接样式    */
-.top-nav-link  {
-    text-decoration:  none;
-    color:  inherit;  /*    使用父元素的文字颜色  */
-    margin:  0  10px;  /*    间距  */
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 20;
 }
 
-/*    主页内容左边标题样式    */
-.title {
-    width: 1280px;
-    height: 100px; /* 减小高度 */
+nav ul li {
+    margin-left: 10px;
+    margin: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+/* 页面顶端导航链接样式 */
+.top-nav-link {
+    text-decoration: none;
+    color: inherit;
+    margin: 0 10px;
+}
+
+.regist{
+    left: 1332.65px;
+    top: 24px;
+    width: 45px;
+    height: 15px;
+    opacity: 1;
+    border-radius: 10px;
+    background: rgb(236, 241, 240);
     display: flex;
     justify-content: flex-start;
+    align-items: flex-start;
+    padding: 9px 12px 14px 18px;
+    }
+
+.login{
+left: 1332.65px;
+top: 24px;
+width: 45px;
+height: 15px;
+opacity: 1;
+border-radius: 10px;
+background: rgba(1, 133, 124, 1);
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+padding: 9px 12px 14px 18px;
+}
+
+/* 页面内容样式 */
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
+    padding: 20px;
+}
+
+/* 主页内容左边标题样式 */
+.title {
     font-weight: bold;
     font-size: 48px;
-    position: absolute; 
-    top: 296px;
-    margin-left: -280px;
+    margin-bottom: 20px;
 }
 
 /* 主页内容左边简介样式 */
 .introduction {
     margin-bottom: 24px;
-    margin-top: -10px; /* 增加上边距并使用负值来上移 */
-    position: absolute; 
-    top: 396px;
-    margin-left: -280px;
 }
 
 .learn-more {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    list-style: none;
+    padding: 0;
+}
+
+.learn-more li {
     border: 1px solid black;
     color: black;
     background-color: white;
     text-align: center;
-    line-height: 25px;
+    padding: 5px;
     font-size: 25px;
     cursor: pointer;
-    margin-top: 410px; 
-    margin-left: -280px;
-    padding: 5px; /* 添加内边距 */
-    width: fit-content; /* 根据内容调整宽度 */
 }
 
-/*    主页内容右边图片样式    */
-.yihu2  {
-    position: absolute;
-    left:380px;
-    top: 95px;
-    width: 532px;
-    height: 395px;
-    opacity: 1;
-    float:  right;  /*  使图片右浮动  */
+/* 主页内容右边图片样式 */
+.right-side {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    right: 0;
 }
 
-/*尾部1区*/
+.yihu2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 500px; /* 或者使用其他固定高度或百分比 */
+}
 
-.left  {
-    list-style-type:  none;  /*  移除默认的列表样式  */
-    padding: 100px;  
-    float: left;
+.yihu2 img {
+    right: -10px;
+    width: 60%;
+    height: 80%;
+    object-fit: cover; /* 或者使用 contain 等其他值 */
 }
-#footer_box  {
-    position:  absolute;
-    bottom:  5%;  /*  使其垂直居中  */
-    left: 160px;
+
+/* 尾部1区 */
+#footer_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f8f8;
 }
-/* 移除所有列表项的标记 */
+
 #footer_box ul {
-    list-style-type: none; /* 移除标记 */
-
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
 }
 
 #footer_box li a {
-    text-decoration: none; /* 链接没有下划线 */
-    color: #333; /* 链接的颜色 */
+    text-decoration: none;
+    color: #333;
 }
 
 #footer_box li a:hover {
-    text-decoration: underline; /* 鼠标悬停时添加下划线 */
+    text-decoration: underline;
 }
 
-
-
-
-/*尾部2区*/
-.footer-bottom  {
-    border-top:  1px  solid  rgba(171, 166, 166, 0.514);  /*  添加一个分界线  */
-    position:  absolute;
-    bottom: 70px;
-    left:  0;
-    right:  0;
-    display:  flex;
-    justify-content:  space-between;
-    align-items:  center;
-    padding:  0  20px;
+/* 尾部2区 */
+.footer-bottom {
+    border-top: 1px solid rgba(171, 166, 166, 0.514);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
 }
 
-.footer-bottom  div  {
-    display:  flex;
-    justify-content:  flex-start;
+.footer-bottom div {
+    display: flex;
+    justify-content: flex-start;
 }
 
-.footer-bottom  a  {
-    margin-right:  10px;  /*  在每个a标签的右侧添加10px的外边距  */
-    text-decoration:  none;  /*  可选：移除下划线  */
-    color:  inherit;  /*  可选：保持文本颜色与父元素一致  */
+.footer-bottom a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: inherit;
 }
 
-.footer-bottom  a:last-child  {
-    margin-right:  0;  /*  最后一个a标签不需要外边距  */
+.footer-bottom a:last-child {
+    margin-right: 0;
 }
 
-
-/*    链接样式    */
-a  {
-    text-decoration:  none;
-    color:  inherit;
+/* 链接样式 */
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-/*    链接在鼠标悬停时的样式    */
-a:hover  {
-    text-decoration:  underline;
+/* 链接在鼠标悬停时的样式 */
+a:hover {
+    text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .right-side {
+        justify-content: center;
+    }
+
+    .yihu2 {
+        max-width: 100%;
+        max-height: 80%;
+    }
+
+    #footer_box ul {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }

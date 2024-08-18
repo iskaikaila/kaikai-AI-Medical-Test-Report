@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PersonalInformation from './pages/PersonalInformation';
+import Home from './pages/Home';
 
 import ProfileManagement from './pages/ProfileManagement';
 import PatientInformation from './pages/PatientInformation';  
@@ -15,6 +16,8 @@ function App() {
         <Router>
             <div>
                 <Routes>
+
+                <Route path="/" element={<Home />} index />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/personal-information" element={<PersonalInformation />} />

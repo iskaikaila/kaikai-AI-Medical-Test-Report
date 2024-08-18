@@ -1,220 +1,175 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
-import './ProfileManagement.css'; 
+import './PatientInformation.css'; 
 
-const sampleData = [
-    { id: 1, name: 'John Doe', age: 30, gender: 'Male', testDetails: 'Blood Test - 2024-08-01' },
-    { id: 2, name: 'Jane Smith', age: 28, gender: 'Female', testDetails: 'X-Ray - 2024-08-02' },
-    { id: 3, name: 'Bob Johnson', age: 45, gender: 'Male', testDetails: 'MRI - 2024-08-03' },
-];
+const patientData = {
+    1: { name: 'John Doe', gender: 'Male', age: 30, contact: '123-456-7890', history: [
+            { date: '2024-07-15', testName: 'Blood Test', symptoms: 'Fatigue', status: 'Completed', result: 'Normal', suggestion: 'Maintain healthy diet', doctor: 'Dr. Smith' },
+            { date: '2024-06-10', testName: 'X-Ray', symptoms: 'Arm Pain', status: 'Completed', result: 'Fracture in left arm', suggestion: 'Rest and avoid heavy lifting', doctor: 'Dr. Johnson' }
+        ]},
+    2: { name: 'Jane Smith', gender: 'Female', age: 28, contact: '987-654-3210', history: [
+            { date: '2024-08-02', testName: 'X-Ray', symptoms: 'Back Pain', status: 'Pending', result: 'N/A', suggestion: 'N/A', doctor: 'Dr. Brown' },
+        ]},
+    3: { name: 'Bob Johnson', gender: 'Male', age: 45, contact: '555-555-5555', history: [
+            { date: '2024-08-03', testName: 'MRI', symptoms: 'Headache', status: 'In Progress', result: 'N/A', suggestion: 'N/A', doctor: 'Dr. White' },
+            { date: '2024-05-22', testName: 'CT Scan', symptoms: 'Chest Pain', status: 'Completed', result: 'No abnormalities detected', suggestion: 'Regular check-ups recommended', doctor: 'Dr. Taylor' }
+        ]},
+};
 
-function ProfileManagement() {
-    const [searchField, setSearchField] = useState('name');
-    const [searchTerm, setSearchTerm] = useState('');
-    const [sortKey, setSortKey] = useState('');
-    const [sortOrder, setSortOrder] = useState('asc');
-    const [isModalOpen, setIsModalOpen] = useState(false); 
-    const [newPatient, setNewPatient] = useState({
-        name: '',
-        age: '',
-        gender: '',
-        testDetails: ''
-    });
+function PatientInformation() {
+    const { id } = useParams();
     const navigate = useNavigate();
+    const patient = patientData[id];
 
-    const handleSearchFieldChange = (event) => {
-        setSearchField(event.target.value);
+    const [showCreateTest, setShowCreateTest] = useState(false);
+    const [testName, setTestName] = useState('');
+    const [symptoms, setSymptoms] = useState('');
+    const [doctor, setDoctor] = useState('');
+
+    const handleResultClick = (record) => {
+        navigate(`/upload-medical-files/${id}/${record.testName}`);
     };
 
-    const handleSearch = (event) => {
-        setSearchTerm(event.target.value);
+    const handleSuggestionClick = (record) => {
+        navigate(`/results-suggestions/${id}/${record.testName}`);
     };
 
-    const handleSort = (key) => {
-        let order = 'asc';
-        if (sortKey === key && sortOrder === 'asc') {
-            order = 'desc';
-        }
-        setSortKey(key);
-        setSortOrder(order);
+    const handleBackToProfile = () => {
+        navigate('/profile');
     };
 
-    const handleViewDetails = (patientId) => {
-        navigate(`/patient/${patientId}`);
+    const handleCreateTest = () => {
+        alert(`Test created with name: ${testName}, symptoms: ${symptoms}, doctor: ${doctor}`);
+        setShowCreateTest(false);
+        setTestName('');
+        setSymptoms('');
+        setDoctor('');
     };
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleInputChange = (e) => {
-        setNewPatient({ ...newPatient, [e.target.name]: e.target.value });
-    };
-
-    const handleAddPatient = () => {
-        // 这里可以处理将新患者添加到数据库的逻辑
-        console.log('New patient added:', newPatient);
-
-        // 清空表单并关闭模态框
-        setNewPatient({ name: '', age: '', gender: '', testDetails: '' });
-        handleCloseModal();
-    };
-
-    // 处理退出登录
     const handleLogout = () => {
-        // 处理退出登录逻辑，如清除 token 或重定向到登录页面
+        console.log('Logging out');
         navigate('/login');
     };
 
-    // 处理跳转到医生用户信息页面
     const handleGoToPersonalInfo = () => {
+        console.log('Navigating to Doctor Information');
         navigate('/personal-information');
     };
 
-    const filteredData = sampleData
-        .filter(patient => {
-            if (searchField === 'id' || searchField === 'age') {
-                return patient[searchField].toString().includes(searchTerm);
-            }
-            return patient[searchField].toLowerCase().includes(searchTerm.toLowerCase());
-        })
-        .sort((a, b) => {
-            if (sortKey) {
-                if (sortOrder === 'asc') {
-                    return a[sortKey] > b[sortKey] ? 1 : -1;
-                } else {
-                    return a[sortKey] < b[sortKey] ? 1 : -1;
-                }
-            }
-            return 0;
-        });
+    if (!patient) {
+        return <div>Patient not found</div>;
+    }
 
     return (
-        <div>
-            <NavBar
-                page="profile"
+        <div className="page-container">
+            <NavBar 
+                page="information"
                 onLogout={handleLogout}
                 onGoToPersonalInfo={handleGoToPersonalInfo}
             />
-            <h3>Profile Management</h3>
-<header>
-<img src="/brand-ye.png" alt="Brand Logo" className='header-logo' />
-<div className="header-text">Welcome to Medixal</div>
-</header>
-
-        <button className='button-Add-Patient' onClick={handleOpenModal}>Add Patient</button> {/* 添加信息按钮 */}
-       
-        <div className='searchtext'>
-            <label htmlFor="searchField">Search by:</label>
-            <select id="searchField" value={searchField} onChange={handleSearchFieldChange}>
-                <option value="name">Patient Name</option>
-                <option value="id">Patient ID</option>
-                <option value="age">Age</option>
-                <option value="gender">Gender</option>
-            </select>
-            <input
-                type="text"
-                placeholder={`Search by ${searchField}...`}
-                value={searchTerm}
-                onChange={handleSearch}
-            />
-        </div>
-
-        {/* 患者的表格 */}
-        <table className='table-container'>
-            <thead>
-                <tr>
-                    <th onClick={() => handleSort('id')}>Patient ID {sortKey === 'id' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                    <th onClick={() => handleSort('name')}>Patient Name {sortKey === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                    <th onClick={() => handleSort('age')}>Age {sortKey === 'age' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                    <th onClick={() => handleSort('gender')}>Gender {sortKey === 'gender' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                    <th onClick={() => handleSort('testDetails')}>Test Details {sortKey === 'testDetails' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {filteredData.map((patient) => (
-                    <tr key={patient.id}>
-                        <td>{patient.id}</td>
-                        <td>{patient.name}</td>
-                        <td>{patient.age}</td>
-                        <td>{patient.gender}</td>
-                        <td>
-                            <button onClick={() => handleViewDetails(patient.id)}>
-                                {patient.testDetails}
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-
-        {/* 模态框 */}
-        {isModalOpen && (
-            <div className={`modal ${isModalOpen ? 'show' : ''}`}>
-                <div className="modal-content">
-                <img src="/brand-ye.png" alt="Brand Logo" className='modal-content-logo' />
-                    <h2>Add New Patient</h2>
-                    <form>
-                        <div>
-                            <label>Name:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={newPatient.name}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Age:</label>
-                            <input
-                                type="number"
-                                name="age"
-                                value={newPatient.age}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Gender:</label>
-                            <select
-                                name="gender"
-                                value={newPatient.gender}
-                                onChange={handleInputChange}
-                                required
-                            >
-                                <option value="">Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>Test Details:</label>
-                            <input
-                                type="text"
-                                name="testDetails"
-                                value={newPatient.testDetails}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <button type="button" onClick={handleAddPatient}>Add Patient</button>
-                            <button type="button" onClick={handleCloseModal}>Cancel</button>
-                        </div>
-                    </form>
+            <img src="/头像 .png" alt="头像" className='tou-logo1' />
+            <div className="text-1">
+                <h2>Patient Information</h2>
+            </div>
+            <div className="text-2">
+                <button className='button-back' onClick={handleBackToProfile}>Back to Profile Management</button>
+            </div>
+            <div className="text-h3">
+                <h3 >Consultation History</h3>
+            </div>
+            
+            <div className="text-4">
+                <h3>Personal Information</h3>
+                <div className='info-no'>
+                    <p><strong>Name:</strong> {patient.name}</p>
+                    <p><strong>Gender:</strong> {patient.gender}</p>
+                    <p><strong>Age:</strong> {patient.age}</p>
+                    <p><strong>Contact:</strong> {patient.contact}</p>
                 </div>
             </div>
-        )}
-    </div>
-);
+            
+            
+            <div className='History-container'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Test Name</th>
+                            <th>Symptoms</th>
+                            <th>Status</th>
+                            <th>Result</th>
+                            <th>Suggestion</th>
+                            <th>Doctor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {patient.history.map((record, index) => (
+                            <tr key={index}>
+                                <td>{record.date}</td>
+                                <td>{record.testName}</td>
+                                <td>{record.symptoms}</td>
+                                <td>{record.status}</td>
+                                <td>
+                                    <button onClick={() => handleResultClick(record)}>
+                                        {record.result}
+                                    </button>
+                                </td>
+                                <td>
+                                    <button onClick={() => handleSuggestionClick(record)}>
+                                        {record.suggestion}
+                                    </button>
+                                </td>
+                                <td>{record.doctor}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div className='input-text'>
+                <button className='button-create' onClick={() => setShowCreateTest(true)}>Create Test</button>
+                
+                {showCreateTest && (
+                    <div className='modal-overlay'>
+                        <div className='modal-content'>
+                            <h3 className='text-5'>Create New Test</h3>
+                            <label>
+                                Test Name:
+                                <input
+                                    type="text"
+                                    value={testName}
+                                    onChange={(e) => setTestName(e.target.value)}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Symptoms:
+                                <input
+                                    type="text"
+                                    value={symptoms}
+                                    onChange={(e) => setSymptoms(e.target.value)}
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                Doctor:
+                                <input
+                                    type="text"
+                                    value={doctor}
+                                    onChange={(e) => setDoctor(e.target.value)}
+                                />
+                            </label>
+                            <br />
+                            <button onClick={handleCreateTest}>Submit</button>
+                            <button onClick={() => setShowCreateTest(false)}>Cancel</button>
+                        </div>
+                    </div>
+                )}
+            </div>
+            <img src={process.env.PUBLIC_URL + '/brand-ye.png'} alt="Brand Logo" className="header-logo" />
+        </div>
+    );
 }
 
-export default ProfileManagement;
-
+export default PatientInformation;

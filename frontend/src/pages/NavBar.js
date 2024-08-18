@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.css'; 
 
 function NavBar({ page, onLogout, onGoToPersonalInfo }) {
     const navigate = useNavigate();
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const handleDoctorInfoClick = () => {
         if (onGoToPersonalInfo) {
@@ -21,6 +22,10 @@ function NavBar({ page, onLogout, onGoToPersonalInfo }) {
         }
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     return (
         <nav className='navbar'>
             <ul>
@@ -30,7 +35,20 @@ function NavBar({ page, onLogout, onGoToPersonalInfo }) {
                     </li>
                 )}
                 <li>
-                    <button onClick={handleLogoutClick}>Logout</button>
+                    <div className="user-avatar" onClick={toggleDropdown}>
+                        <div className="avatar-container">
+                            <span>User Avatar</span>
+                            <img src="./ren.png" alt="User Avatar" />
+                        </div>
+                    </div>
+                    {isDropdownOpen && (
+                        <div className="dropdown">
+                            <ul>
+                                <li><button onClick={() => console.log('personal-information')}>personal-information</button></li>
+                                <li><button onClick={handleLogoutClick}>Logout</button></li>
+                            </ul>
+                        </div>
+                    )}
                 </li>
             </ul>
         </nav>

@@ -31,15 +31,57 @@
   padding: 20px;
 }
 
-.frame-upload-info1, .frame-upload-info2, .frame-upload-info3 {
-  margin-left: 40px; /* 通过增加左边距来向右移动，调整这个值以控制右移的距离 */
+.upload-main-container {
+  display: flex;
+  justify-content: space-between;
 }
 
+.upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 将子元素居中 */
+  width: 60%; /* 设置合适的宽度，使其占据更大的空间 */
+  padding: 20px;
+  border: 1px solid #ccc; /* 添加完整的边框 */
+  border-radius: 10px; /* 添加圆角 */
+  background-color: #f9f9f9; /* 设置背景色 */
+}
 
-.report-container h3{
+.uploaded-files-table {
+  width: 50%;
+  padding: 20px;
+  border: 1px solid #ccc; /* 添加完整的边框 */
+  border-radius: 10px; /* 添加圆角 */
+  background-color: #f9f9f9; /* 设置背景色 */
+}
+
+.uploaded-files-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.uploaded-files-table th, .uploaded-files-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.uploaded-files-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.frame-upload-info1, .frame-upload-info2, .frame-upload-info3 {
+  width: 100%; /* 子元素宽度设置为100%，以适应父容器 */
+  margin-bottom: 20px; /* 添加底部间距 */
+  text-align: left; /* 内容居中对齐 */
+}
+.frame-upload-info1 h3{
+  top:20%;
+}
+.report-container h3 {
   position: relative;
   top: 15px;    
-  left:890px;
+  left: 890px;
 }
 
 .report-container input {

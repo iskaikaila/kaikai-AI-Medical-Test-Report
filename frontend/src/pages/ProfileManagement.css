@@ -1,91 +1,91 @@
-/* brand-ye图片的CSS */
 .header-logo {
   position: absolute;
-  left: 60px;
+  left: 4%; /* 使用百分比 */
   top: 20px;
-  width: 180px;
-  height: 120px;
+  width: 15%; /* 使用百分比 */
+  max-width: 180px; /* 最大宽度 */
+  height: auto; /* 高度自适应 */
   opacity: 1;
   background: rgba(29, 33, 41, 1);
 }
 
-h3 {
+.txt-1 {
   position: absolute;
-  left: 65px;
-  top: 120px;
-  width: 350px;
-  height: 48px;
+  left: 4%; /* 使用百分比 */
+  top: 5%;
+  width: 50%; /* 使用百分比 */
+  max-width: 350px; /* 最大宽度 */
+  height: auto; /* 高度自适应 */
   opacity: 1;
-}
-
-/* Welcome to Medixal文本的CSS */
-.header-text {
-  position: relative;
-  left: 50px;
-  top: 110px;
-  width: 350px;
-  height: 48px;
-  opacity: 1;
-  font-size: 35px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: 21.6px;
-  color: rgba(0, 0, 0, 1);
-  text-align: center;
-  vertical-align: middle;
+  font-size: 2.1em; /* 使用 em */
 }
 
 .button-Add-Patient {
-  position: relative;
-  left:790px;
-  top: 115px;
-  margin: 0 auto; /* 居中 */
+  position: absolute; /* 使用绝对定位 */
+  right: 20px; /* 设置到最右侧 */
+  top: 10%;
   height: 40px;
   opacity: 1;
   background: rgba(1, 133, 124, 1);
   border: 1px solid rgba(0, 0, 0, 1);
-  font-size: 26px;
+  font-size: 1.5em; /* 使用 em */
   font-weight: 400;
   letter-spacing: 0px;
-  line-height: 42.19px;
+  line-height: 1.6em; /* 使用 em */
   color: rgba(255, 255, 255, 1);
   text-align: center;
   vertical-align: middle;
+  z-index: 10; 
 }
 
 .searchtext {
   position: relative;
-  width: 90%; 
+  width: 100%; /* 使宽度与页面一致 */
   margin: 0 auto; /* 居中 */
   top: 75px;
-  left: 130px;
-  font-size: 26px;
+  left: 0; /* 调整左偏移 */
+  font-size: 1.5em; /* 使用 em */
+  box-sizing: border-box; 
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: space-between; /* 均匀分布 */
+}
+
+.searchlable {
+  width: 10%; /* 占10% */
+  box-sizing: border-box; 
+  margin-left: 5%;
+}
+
+.searchoption {
+  width: 8%;
+  box-sizing: border-box; 
+}
+
+.input-txt {
+  width: 70%; /* 占70% */
+  box-sizing: border-box; 
 }
 
 .table-container {
-  position: relative; /* 保持相对定位，如果不需要绝对定位可以去掉 */
-  left: 50%;
-  top: 85px;
-  transform: translateX(-50%);
-  width: 90%;
+  position: relative;
+  top: 105px;
+  width: 80%; /* 使宽度与页面一致 */
   margin: 0 auto; /* 居中 */
-  width: 1482px;
-  height: 113px;
   opacity: 1;
-  display: grid;
-  gap: 12px;
-  row-gap: 15px;
-  font-size: 24px;
+  display: block; /* 改为块级元素 */
+  font-size: 1.5em; /* 使用 em */
   font-weight: 100%;
-  line-height: 32.93px;
+  line-height: 1.3em; /* 使用 em */
   color: rgba(56, 56, 56, 1);
   text-align: left;
   vertical-align: middle;
+  box-sizing: border-box; /* 确保内边距和边框不会增加元素的宽度 */
 }
 
 .table-container table {
-  width: 1582px;
+  width: 100%; /* 使表格宽度与容器一致 */
   border-collapse: collapse; /* 为了减少表格单元格之间的间距 */
+  box-sizing: border-box; /* 确保内边距和边框不会增加元素的宽度 */
 }
 
 .table-container th,
@@ -93,6 +93,7 @@ h3 {
   padding: 18px; /* 调整表格单元格内的填充 */
   border: 1px solid rgba(0, 0, 0, 0.1); /* 根据需要调整边框 */
   text-align: left;
+  box-sizing: border-box; /* 确保内边距和边框不会增加元素的宽度 */
 }
 
 .table-container th {
@@ -101,13 +102,36 @@ h3 {
 }
 
 .table-container td {
-  line-height: 20px; /* 调整单元格内文本的行高 */
+  line-height: 1.2em; /* 调整单元格内文本的行高 */
+}
+
+.name{
+  width: 30%; /* 使用百分比 */
+  box-sizing: border-box; 
+}
+.gender{
+  width: 30%; /* 使用百分比 */
+  box-sizing: border-box; 
+}
+.testDetails {
+  width: 25%; /* 使用百分比 */
+  box-sizing: border-box; 
+}
+
+.id{
+  width: 15%; /* 使用百分比 */
+  box-sizing: border-box; 
+}
+
+.age {
+  width: 10%; /* 使用百分比 */
+  box-sizing: border-box; 
 }
 
 /* 模态框部分 */
 .modal {
   position: fixed; /* 固定定位 */
-  top: 0;
+  top: 0px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -127,7 +151,6 @@ h3 {
   opacity: 1;
   background: rgba(29, 33, 41, 1);
 }
-
 .modal.show {
   display: flex; /* 显示模态框 */
 }
@@ -141,7 +164,7 @@ h3 {
   position: absolute; /* 绝对定位 */
   left: 50%; /* 居中 */
   transform: translateX(-50%);
-  top: calc(115px + 60px); /* 在 .button-Add-Patient 的正下方 */
+  top: calc(115px + 90px); /* 在 .button-Add-Patient 的正下方 */
 }
 
 .modal-content h2 {
@@ -168,4 +191,38 @@ h3 {
 .modal-content form button {
   padding: 10px 20px;
   margin-right: 10px;
+}
+
+/* 媒体查询 */
+@media (max-width: 768px) {
+  .header-logo {
+    left: 2%;
+    width: 20%;
+  }
+
+  .txt-1 {
+    left: 2%;
+    width: 40%;
+    font-size: 2em;
+  }
+
+  .button-Add-Patient {
+    right: 10px;
+    font-size: 1.2em;
+  }
+
+  .searchtext {
+    top: 60px;
+    font-size: 1.2em;
+  }
+
+  .table-container {
+    top: 90px;
+    width: 90%;
+    font-size: 1.2em;
+  }
+
+  .modal-content {
+    top: 100px;
+  }
 }

@@ -62,63 +62,35 @@ function PatientInformation() {
     }
 
     return (
-        <div>
+        <div className="page-container">
             <NavBar 
                 page="information"
                 onLogout={handleLogout}
                 onGoToPersonalInfo={handleGoToPersonalInfo}
             />
-            <img src="/brand-ye.png" alt="Brand Logo" className='header-logo1' />
-            <h2>Patient Information</h2>
-            <button className='button-back' onClick={handleBackToProfile}>Back to Profile Management</button>
-           
-            <div className='input-text'>
-            {showCreateTest && (
-                <div >
-                    <h3>Create New Test</h3>
-                    <label>
-                        Test Name:
-                        <input
-                            type="text"
-                            value={testName}
-                            onChange={(e) => setTestName(e.target.value)}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Symptoms:
-                        <input
-                            type="text"
-                            value={symptoms}
-                            onChange={(e) => setSymptoms(e.target.value)}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Doctor:
-                        <input
-                            type="text"
-                            value={doctor}
-                            onChange={(e) => setDoctor(e.target.value)}
-                        />
-                    </label>
-                    <br />
-                    <button onClick={handleCreateTest}>Submit</button>
-                    <button onClick={() => setShowCreateTest(false)}>Cancel</button>
-                </div>
-            )}
- </div>
-
-            <div className='info-no'>
             <img src="/头像 .png" alt="头像" className='tou-logo1' />
-                <h3>Personal Information</h3>
-                <p><strong>Name:</strong> {patient.name}</p >
-                <p><strong>Gender:</strong> {patient.gender}</p >
-                <p><strong>Age:</strong> {patient.age}</p >
-                <p><strong>Contact:</strong> {patient.contact}</p >
+            <div className="text-1">
+                <h2>Patient Information</h2>
             </div>
+            <div className="text-2">
+                <button className='button-back' onClick={handleBackToProfile}>Back to Profile Management</button>
+            </div>
+            <div className="text-h3">
+                <h3 >Consultation History</h3>
+            </div>
+            
+            <div className="text-4">
+                <h3>Personal Information</h3>
+                <div className='info-no'>
+                    <p><strong>Name:</strong> {patient.name}</p>
+                    <p><strong>Gender:</strong> {patient.gender}</p>
+                    <p><strong>Age:</strong> {patient.age}</p>
+                    <p><strong>Contact:</strong> {patient.contact}</p>
+                </div>
+            </div>
+            
+            
             <div className='History-container'>
-                <h3>Consultation History</h3>
                 <table>
                     <thead>
                         <tr>
@@ -153,10 +125,50 @@ function PatientInformation() {
                         ))}
                     </tbody>
                 </table>
-                <button className='button-create' onClick={() => setShowCreateTest(true)}>Create Test</button>
             </div>
-
-           
+            
+            <div className='input-text'>
+                <button className='button-create' onClick={() => setShowCreateTest(true)}>Create Test</button>
+                
+                {showCreateTest && (
+                    <div className='modal-overlay' onClick={() => setShowCreateTest(false)}>
+                    <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+                        <h3 className='text-5'>Create New Test</h3>
+                        <img src={process.env.PUBLIC_URL + '/brand-ye.png'} alt="Brand Logo" className="modal-content-logo" />
+                        <label>
+                            Test Name:
+                            <input
+                                type="text"
+                                value={testName}
+                                onChange={(e) => setTestName(e.target.value)}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Symptoms:
+                            <input
+                                type="text"
+                                value={symptoms}
+                                onChange={(e) => setSymptoms(e.target.value)}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Doctor:
+                            <input
+                                type="text"
+                                value={doctor}
+                                onChange={(e) => setDoctor(e.target.value)}
+                            />
+                        </label>
+                        <br />
+                        <button onClick={handleCreateTest}>Submit</button>
+                        <button onClick={() => setShowCreateTest(false)}>Cancel</button>
+                    </div>
+                </div>
+                )}
+            </div>
+            <img src={process.env.PUBLIC_URL + '/brand-ye.png'} alt="Brand Logo" className="header-logo" />
         </div>
     );
 }
