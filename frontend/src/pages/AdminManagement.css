@@ -1,0 +1,187 @@
+/* Container for the entire admin management page */
+.admin-container {
+    width: 80%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #01857C;
+    border-radius: 8px;
+}
+
+/* Header section containing the logo and title */
+.admin-header {
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    align-items: flex-start; /* Aligns everything to the left */
+    margin-bottom: 10px;
+}
+
+/* Container for the logo images */
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space between logo and title */
+}
+
+/* Logo text styling */
+.logo-text {
+    height: 40px;
+    margin-left: 10px;
+}
+
+/* Logo leaf image styling */
+.logo-leaf {
+    height: 70px;
+    weight: auto;
+}
+
+/* Admin title image styling */
+.admin-title {
+    margin-top: -10px;
+    margin-left: 5px; /* Adjust if needed for alignment */
+    height: 30px; /* Adjust height to fit the design */
+}
+
+/* Search section containing filter, input, search button, and add user icon */
+.search-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Filter dropdown styling */
+.filter-select {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Input field for searching */
+.search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Button for initiating the search */
+.search-button {
+    padding: 10px 20px;
+    background-color: #01857C;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Styling for the add user icon */
+.add-user-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+/* Table for displaying user data */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #CCC;
+    background-color: #fff;
+}
+
+/* Table header and cell styling */
+.user-table th,
+.user-table td {
+    padding: 10px;
+    border: 1px solid #CCC;
+    text-align: left;
+    font-size: 14px;
+}
+
+.user-table th {
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+/* Modal overlay for the registration form */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Content of the modal */
+.modal-content {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    width: 320px;  /* Adjusted width to be more compact */
+    position: relative;
+    border: 1px solid rgba(1, 133, 124, 1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal title styling */
+.modal-content h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px; /* Slightly smaller */
+}
+
+/* Label styling within the modal */
+.modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;  /* Slightly smaller */
+}
+
+/* Input and select fields within the modal */
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 6px;  /* Reduced padding */
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 14px;  /* Slightly smaller */
+}
+
+/* Buttons inside the modal */
+.modal-content button {
+    padding: 8px 15px;  /* Reduced padding */
+    background-color: rgba(1, 133, 124, 1);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 48%;  /* Smaller buttons */
+    margin-right: 2%;  /* Slight gap between buttons */
+    box-sizing: border-box;
+}
+
+.modal-content button:last-child {
+    margin-right: 0;  /* Remove margin for the last button */
+}
+
+/* Close button for the modal */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;  /* Smaller close button */
+    cursor: pointer;
+    color: #333;
+}
