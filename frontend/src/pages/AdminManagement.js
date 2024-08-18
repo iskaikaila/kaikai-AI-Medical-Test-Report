@@ -4,7 +4,7 @@ import axios from 'axios';
 function AdminManagement() {
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchField, setSearchField] = useState('name');
+    const [searchField, setSearchField] = useState('username');
     const [sortConfig, setSortConfig] = useState({ key: '', direction: 'ascending' });
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);
     const [newUser, setNewUser] = useState({
@@ -12,17 +12,23 @@ function AdminManagement() {
         username: '',
         password: '',
         department: '',
-        role: '',
+        role: 'user', // 默认值为 'user'
         phone: '',
         email: '',
         address: '',
     });
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
+        // 在组件加载时从数据库获取用户数据
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('http://localhost:5001/api/auth/users');
-                setUsers(response.data.users);
+                if (Array.isArray(response.data)) {
+                    setUsers(response.data);
+                } else {
+                    console.error('Data format is incorrect:', response.data);
+                }
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -35,16 +41,61 @@ function AdminManagement() {
         setSearchTerm(e.target.value);
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!newUser.id) {
+            newErrors.id = 'ID is required.';
+        }
+        if (!newUser.username) {
+            newErrors.username = 'Username is required.';
+        }
+        if (!newUser.password) {
+            newErrors.password = 'Password is required.';
+        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(newUser.password)) {
+            newErrors.password = 'Password must be at least 8 characters long and include uppercase, lowercase, and numbers.';
+        }
+        if (!newUser.role) {
+            newErrors.role = 'Role is required.';
+        }
+        if (!/^\d+$/.test(newUser.phone)) {
+            newErrors.phone = 'Phone must be a numeric string.';
+        }
+        if (!/\S+@\S+\.\S+/.test(newUser.email)) {
+            newErrors.email = 'Email must be a valid email address.';
+        }
+
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleRegister = async () => {
+        if (!validateForm()) {
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:5001/api/auth/admin/register', newUser);
             setUsers([...users, response.data.user]);
-            setNewUser({ id: '', username: '', password: '', department: '', role: '', phone: '', email: '', address: '' });
+            setNewUser({ id: '', username: '', password: '', department: '', role: 'user', phone: '', email: '', address: '' });
             setShowRegistrationForm(false);
+            setErrors({});
             alert('User registered successfully');
         } catch (error) {
             console.error('Error registering user:', error);
-            alert(error.response?.data?.message || 'Error registering user');
+            setErrors({ form: error.response?.data?.message || 'Error registering user' });
+        }
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5001/api/auth/admin/users/${id}`);
+            setUsers(users.filter(user => user.id !== id));
+            alert('User deleted successfully');
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            alert('Error deleting user');
         }
     };
 
@@ -67,22 +118,25 @@ function AdminManagement() {
     });
 
     const filteredUsers = sortedUsers.filter(user => {
-        // 检查 user[searchField] 是否为 undefined 或 null
-        if (user[searchField] === undefined || user[searchField] === null) {
-            return false;
-        }
-        return user[searchField].toString().toLowerCase().includes(searchTerm.toLowerCase());
+        return user[searchField]?.toString().toLowerCase().includes(searchTerm.toLowerCase());
     });
-    
+
+    const handleInputChange = (field, value) => {
+        setNewUser({ ...newUser, [field]: value });
+        setErrors({ ...errors, [field]: '' });
+    };
+
     return (
         <div>
             <h2>Admin Management</h2>
+
+            {errors.form && <p style={{ color: 'red' }}>{errors.form}</p>}
 
             <div>
                 <label>
                     Search Field:
                     <select value={searchField} onChange={(e) => setSearchField(e.target.value)}>
-                        <option value="name">Name</option>
+                        <option value="username">Username</option>
                         <option value="department">Department</option>
                         <option value="role">Role</option>
                         <option value="id">ID</option>
@@ -114,6 +168,7 @@ function AdminManagement() {
                         <th onClick={() => handleSort('phone')}>Phone</th>
                         <th onClick={() => handleSort('email')}>Email</th>
                         <th onClick={() => handleSort('address')}>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -127,6 +182,9 @@ function AdminManagement() {
                             <td>{user.phone}</td>
                             <td>{user.email}</td>
                             <td>{user.address}</td>
+                            <td>
+                                <button onClick={() => handleDelete(user.id)}>Delete</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -140,8 +198,9 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.id}
-                            onChange={(e) => setNewUser({ ...newUser, id: e.target.value })}
+                            onChange={(e) => handleInputChange('id', e.target.value)}
                         />
+                        {errors.id && <p style={{ color: 'red' }}>{errors.id}</p>}
                     </label>
                     <br />
                     <label>
@@ -149,8 +208,9 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.username}
-                            onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+                            onChange={(e) => handleInputChange('username', e.target.value)}
                         />
+                        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
                     </label>
                     <br />
                     <label>
@@ -158,8 +218,9 @@ function AdminManagement() {
                         <input
                             type="password"
                             value={newUser.password}
-                            onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                            onChange={(e) => handleInputChange('password', e.target.value)}
                         />
+                        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
                     </label>
                     <br />
                     <label>
@@ -167,17 +228,20 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.department}
-                            onChange={(e) => setNewUser({ ...newUser, department: e.target.value })}
+                            onChange={(e) => handleInputChange('department', e.target.value)}
                         />
                     </label>
                     <br />
                     <label>
                         Role:
-                        <input
-                            type="text"
+                        <select
                             value={newUser.role}
-                            onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-                        />
+                            onChange={(e) => handleInputChange('role', e.target.value)}
+                        >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        {errors.role && <p style={{ color: 'red' }}>{errors.role}</p>}
                     </label>
                     <br />
                     <label>
@@ -185,8 +249,9 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.phone}
-                            onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
+                            onChange={(e) => handleInputChange('phone', e.target.value)}
                         />
+                        {errors.phone && <p style={{ color: 'red' }}>{errors.phone}</p>}
                     </label>
                     <br />
                     <label>
@@ -194,8 +259,9 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.email}
-                            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
                         />
+                        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
                     </label>
                     <br />
                     <label>
@@ -203,7 +269,7 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.address}
-                            onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
+                            onChange={(e) => handleInputChange('address', e.target.value)}
                         />
                     </label>
                     <br />
@@ -216,3 +282,4 @@ function AdminManagement() {
 }
 
 export default AdminManagement;
+
