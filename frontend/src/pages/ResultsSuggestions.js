@@ -1,46 +1,45 @@
-import React from 'react'; 
-import { useParams, useNavigate } from 'react-router-dom';
-import NavBar from './NavBar';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const resultData = {
-    1: { 
-        testType: 'Blood Test', 
-        details: 'Blood test result showing normal levels.', 
-        suggestions: 'Maintain a balanced diet and regular exercise.' 
-    },
-    2: { 
-        testType: 'X-Ray', 
-        details: 'X-Ray shows a minor fracture in the left arm.', 
-        suggestions: 'Rest the arm and avoid heavy lifting.' 
-    },
-    3: { 
-        testType: 'MRI', 
-        details: 'MRI indicates no major issues.', 
-        suggestions: 'Regular follow-up in 6 months.' 
-    },
-};
+function ResultSuggestion() {
+    const { infoId } = useParams();
+    const [suggestion, setSuggestion] = useState('');
 
-function ResultsSuggestions() {
-    const { id } = useParams(); 
-    const navigate = useNavigate();
-    const result = resultData[id];
+    useEffect(() => {
+        const fetchSuggestion = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5001/api/patient-info/${infoId}/suggestion`);
+                setSuggestion(response.data.suggestion);
+            } catch (error) {
+                console.error('Error fetching suggestion:', error);
+            }
+        };
 
-    const handleBackToPatientDetails = () => {
-        navigate(`/patient/${id}`);
+        fetchSuggestion();
+    }, [infoId]);
+
+    const handleChange = (e) => {
+        setSuggestion(e.target.value);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.put(`http://localhost:5001/api/patient-info/${infoId}/suggestion`, { suggestion });
+            alert('Suggestion updated successfully!');
+        } catch (error) {
+            console.error('Error updating suggestion:', error);
+        }
     };
 
     return (
-        <div>
-            <NavBar page="results" />
-            <h2>Results and Suggestions</h2>
-            <button onClick={handleBackToPatientDetails}>Back to Patient Details</button>
-            <div>
-                <h3>Test Type: {result?.testType}</h3>
-                <p><strong>Details:</strong> {result?.details || 'No details available.'}</p>
-                <p><strong>Suggestions:</strong> {result?.suggestions || 'No suggestions available.'}</p>
-            </div>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <h2>Update Suggestion</h2>
+            <textarea value={suggestion} onChange={handleChange} />
+            <button type="submit">Save</button>
+        </form>
     );
 }
 
-export default ResultsSuggestions;
+export default ResultSuggestion;

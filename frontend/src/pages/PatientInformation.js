@@ -39,7 +39,14 @@ function PatientInformation() {
     
         fetchPatientDetails();
     }, [patientId]);
-    
+
+    const handleResultClick = (infoId) => {
+        navigate(`/upload-file/${infoId}`);
+    };
+
+    const handleSuggestionClick = (infoId) => {
+        navigate(`/result-suggestion/${infoId}`);
+    };
     
     return (
         <div>
@@ -74,8 +81,12 @@ function PatientInformation() {
                                     <tr key={info.id}>
                                         <td>{info.symptoms}</td>
                                         <td>{info.test_status}</td>
-                                        <td>{info.result}</td>
-                                        <td>{info.suggestion}</td>
+                                        <td>
+                                            <button onClick={() => handleResultClick(info.id)}>View Result</button>
+                                        </td>
+                                        <td>
+                                            <button onClick={() => handleSuggestionClick(info.id)}>View Suggestion</button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
