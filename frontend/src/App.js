@@ -12,7 +12,6 @@ import AdminLogin from './pages/AdminLogin';
 import AdminManagement from './pages/AdminManagement'; 
 
 
-
 function App() {
     return (
         <Router>
@@ -20,20 +19,15 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/personal-information/:id/:testName" element={<PersonalInformation />} />
+                    <Route path="/personal-information" element={<PersonalInformation />} />
                     <Route path="/upload" element={<UploadFile />} />
                     <Route path="/profile" element={<ProfileManagement />} />
-                    {/* <Route path="/patient/:id" element={<PatientInformation />} /> */}
+                    <Route path="/patient/:id" element={<PatientInformation />} />
                     <Route path="/upload-medical-files/:id/:type" element={<UploadMedicalFiles />} /> 
                     <Route path="/results-suggestions/:id/:type" element={<ResultsSuggestions />} /> 
                     <Route path="/" element={<Navigate to="/login" />} />
                     <Route path="/admin-login" element={<AdminLogin />} />
                     <Route path="/admin-management" element={<AdminManagement />} />  
-
-<<<<<<< HEAD
-=======
-                    <Route path="/patient/:patientId" element={<PatientInformation />} />
->>>>>>> c97be90b (test2)
                 </Routes>
             </div>
         </Router>
