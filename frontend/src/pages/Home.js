@@ -26,7 +26,6 @@ const HomePage = () => {
                         <a href="#">更多内容</a>
                     </nav>
                     <div className="auth-buttons">
-                        <Link to="/register" className="register-btn">注册</Link>
                         <Link to="/login" className="login-btn">登录</Link>
                     </div>
                 </div>

@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4231d0-476e-44be-bdce-0d10e166b2db" name="Changes" comment="bababa">
-      <change beforePath="$PROJECT_DIR$/kaikai-AI-Medical-Test-Report.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/images/Examples_scene-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/images/avatarImage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/images/user.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/NavBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/NavBar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/NavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/PatientInformation.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PatientInformation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/PatientInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PatientInformation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/PersonalInformation.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PersonalInformation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ProfileManagement.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ProfileManagement.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ProfileManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ProfileManagement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Tian" />
+        <entry key="$PROJECT_DIR$" value="kaikai" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,7 +59,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Rebasing Tian",
+    "git-widget-placeholder": "Tian",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "C:/Users/Zen/IdeaProjects/kaikai-AI-Medical-Test-Report/frontend/src/pages/images",
     "list.type.of.created.stylesheet": "CSS",

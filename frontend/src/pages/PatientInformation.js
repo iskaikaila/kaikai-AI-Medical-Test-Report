@@ -1,102 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import './PatientInformation.css';
 import NavBar from './NavBar';
+import avatarImage from './images/avatarImage.png'; // Ensure this path is correct
 
 function PatientInformation() {
-    const { patientId } = useParams();
-    const [patient, setPatient] = useState(null);
-    const [patientInfo, setPatientInfo] = useState([]);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchPatientDetails = async () => {
-            try {
-                console.log(`Fetching patient with ID: ${patientId}`);
-                
-                const patientResponse = await axios.get(`http://localhost:5001/api/patients/${patientId}`);
-                console.log('Patient response:', patientResponse.data);
-    
-                if (patientResponse.data) {
-                    setPatient(patientResponse.data);
-                } else {
-                    console.error('No patient data found');
-                }
-    
-                const infoResponse = await axios.get(`http://localhost:5001/api/patients/patient-info/${patientId}`);
-                console.log('Patient info response:', infoResponse.data);
-    
-                if (infoResponse.data) {
-                    setPatientInfo(infoResponse.data);
-                } else {
-                    console.error('No patient info data found');
-                }
-    
-            } catch (error) {
-                console.error('Error fetching patient details:', error);
-            }
-        };
-    
-        fetchPatientDetails();
-    }, [patientId]);
-
-    const handleResultClick = (infoId) => {
-        navigate(`/upload-file/${infoId}`);
-    };
-
-    const handleSuggestionClick = (infoId) => {
-        navigate(`/result-suggestion/${infoId}`);
-    };
-    
     return (
-        <div>
-            <NavBar
-                page="patientInfo"
-                onLogout={() => navigate('/login')}
-                onGoToPersonalInfo={() => navigate('/personal-information')}
-            />
-            <h2>Patient Information</h2>
-            {patient ? (
-                <div>
-                    <div>
-                        <h3>Personal Information</h3>
-                        <p><strong>Name:</strong> {patient.name}</p>
-                        <p><strong>Age:</strong> {patient.age}</p>
-                        <p><strong>Gender:</strong> {patient.gender}</p>
-                        <p><strong>Test Details:</strong> {patient.test_details}</p>
-                    </div>
-                    <div>
-                        <h3>Consultation History</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Symptom</th>
-                                    <th>Test Status</th>
-                                    <th>Result</th>
-                                    <th>Suggestion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {patientInfo.map((info) => (
-                                    <tr key={info.id}>
-                                        <td>{info.symptoms}</td>
-                                        <td>{info.test_status}</td>
-                                        <td>
-                                            <button onClick={() => handleResultClick(info.id)}>View Result</button>
-                                        </td>
-                                        <td>
-                                            <button onClick={() => handleSuggestionClick(info.id)}>View Suggestion</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+        <div className="container">
+            <div className="navbar-container">
+                <NavBar />
+            </div>
+            <h2>患者个人信息</h2>
+            <div className="personal-info clearfix">
+                <div className="avatar">
+                    <img src={avatarImage} alt="Patient Avatar" />
                 </div>
-            ) : (
-                <p>Loading patient information...</p>
-            )}
-            <button onClick={() => navigate('/profile-management')}>Back to Profile Management</button>
+                <div>
+                    <p><strong>姓名:</strong> 李**</p>
+                    <p><strong>性别:</strong> 男</p>
+                    <p><strong>年龄:</strong> XX</p>
+                    <p><strong>联系方式:</strong> XXXX-XXXXXXX</p>
+                </div>
+            </div>
+            <div className="consultation-history">
+                <h3>就诊历史</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>检查命名</th>
+                        <th>病症</th>
+                        <th>检查状态</th>
+                        <th>结果</th>
+                        <th>建议</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {/* Replace with dynamic data */}
+                    <tr>
+                        <td>12345</td>
+                        <td>糖尿病初诊</td>
+                        <td>糖尿病</td>
+                        <td>完成</td>
+                        <td>结果</td>
+                        <td>建议</td>
+                    </tr>
+                    <tr>
+                        <td>12345</td>
+                        <td>糖尿病复诊</td>
+                        <td>糖尿病</td>
+                        <td>完成</td>
+                        <td>结果</td>
+                        <td>建议</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button className="back-button" onClick={() => window.history.back()}>返回个人信息管理</button>
         </div>
     );
 }
