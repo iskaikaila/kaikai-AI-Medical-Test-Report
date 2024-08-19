@@ -16,6 +16,15 @@ function UploadFile() {
                 console.log('Response data:', response.data);  // 打印响应数据
                 setSymptomName(response.data.symptoms); // 假设症状名称字段是 `symptoms`
                 setUploadedFiles(response.data.files);   // 假设文件列表字段是 `files`
+                
+                // 添加一些示例文件数据
+                const exampleFiles = [
+                    { file_name: 'ExampleFile1.pdf', file_path: 'example1.pdf' },
+                    { file_name: 'ExampleFile2.pdf', file_path: 'example2.pdf' },
+                    { file_name: 'ExampleFile3.pdf', file_path: 'example3.pdf' }
+                ];
+                setUploadedFiles(prevFiles => [...prevFiles, ...exampleFiles]);
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

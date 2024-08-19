@@ -9,7 +9,8 @@ import PatientInformation from './pages/PatientInformation';
 import UploadMedicalFiles from './pages/UploadMedicalFiles';
 import ResultsSuggestions from './pages/ResultsSuggestions'; 
 import AdminLogin from './pages/AdminLogin'; 
-import AdminManagement from './pages/AdminManagement'; 
+import AdminManagement from './pages/AdminManagement';
+import Home from'./pages/Home';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Router>
             <div>
                 <Routes>
+                    <Route path="/home" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/personal-information" element={<PersonalInformation />} />

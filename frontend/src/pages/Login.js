@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import './Login.css';
+import logo from '../images/brand.png';
+import leaf from '../images/tree-2.png';
+import scene from '../images/Examples_scene-2.png';
 
-function Login() {
+
+
+function Login({ onClose }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
 
     const handleLogin = async () => {
         if (!username || !password) {
@@ -25,11 +29,10 @@ function Login() {
             const data = await response.json();
 
             if (response.ok && data.user) {
-                // 根据用户角色导航到不同页面
                 if (data.user.role === 'admin') {
-                    navigate('/admin-management'); // 管理员页面
+                    window.location.href = '/admin-management';
                 } else {
-                    navigate('/profile'); // 普通用户页面
+                    window.location.href = '/profile';
                 }
             } else {
                 setError(data.message || 'Login failed');
@@ -40,35 +43,40 @@ function Login() {
         }
     };
 
-    const handleAdminLoginRedirect = () => {
-        navigate('/admin-login');
-    };
-
     return (
-        <div>
-            <h2>Login</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <label>
-                Username:
-                <input 
-                    type="text" 
-                    value={username} 
-                    onChange={(e) => setUsername(e.target.value)} 
-                />
-            </label>
-            <br />
-            <label>
-                Password:
-                <input 
-                    type="password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                />
-            </label>
-            <br />
-            <button onClick={handleLogin}>Login</button>
-            <br /><br />
-            <button onClick={handleAdminLoginRedirect}>Admin Login</button> {/* 管理员登录按钮 */}
+        <div className="modal">
+            <div className="modal-content">
+                <span className="close-button" onClick={onClose}>&times;</span>
+                <div className="login-header">
+                    <img src={logo} alt="MedixAI" className="login-logo" />
+                    <img src={leaf} alt="Leaf" className="login-leaf" />
+                </div>
+                <h2>登录</h2>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <div className="login-inputs">
+                    <label>
+                        <input
+                            type="text"
+                            placeholder="请输入个人ID"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        <input
+                            type="password"
+                            placeholder="请输入登录密码"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <button className="login-button" onClick={handleLogin}>登录</button>
+                <button className="admin-login-button" onClick={handleLogin}>登录（管理员）</button>
+                <div className="login-image">
+                    <img src={scene} alt="Scene" className="login-scene" />
+                </div>
+            </div>
         </div>
     );
 }

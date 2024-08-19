@@ -1,0 +1,139 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    color: #008080;
+    margin-top: 20px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    background-color: #f0f0f0; /* Light grey background */
+    padding: 10px 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px; /* Space below the navbar */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.personal-info, .consultation-history {
+    margin-bottom: 40px;
+}
+
+.personal-info h3, .consultation-history h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.personal-info p, .consultation-history p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.personal-info p strong {
+    width: 100px;
+    display: inline-block;
+}
+
+.avatar {
+    float: left;
+    margin-right: 20px;
+}
+
+.avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Circular avatar */
+    object-fit: cover; /* Cover the area completely */
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+th {
+    background-color: #008080;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #008080;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #006666;
+}
+
+.back-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #008080;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #006666;
+}
+
+button.view-button {
+    padding: 5px 10px;
+    background-color: #01857C;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.view-button:hover {
+    background-color: #005f5f;
+}

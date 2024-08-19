@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './AdminManagement.css';
+
 
 function AdminManagement() {
     const [users, setUsers] = useState([]);
@@ -130,13 +132,11 @@ function AdminManagement() {
         <div>
             <h2>Admin Management</h2>
 
-            {errors.form && <p style={{ color: 'red' }}>{errors.form}</p>}
-
             <div>
                 <label>
                     Search Field:
                     <select value={searchField} onChange={(e) => setSearchField(e.target.value)}>
-                        <option value="username">Username</option>
+                        <option value="name">Name</option>
                         <option value="department">Department</option>
                         <option value="role">Role</option>
                         <option value="id">ID</option>
@@ -168,7 +168,6 @@ function AdminManagement() {
                         <th onClick={() => handleSort('phone')}>Phone</th>
                         <th onClick={() => handleSort('email')}>Email</th>
                         <th onClick={() => handleSort('address')}>Address</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -182,9 +181,6 @@ function AdminManagement() {
                             <td>{user.phone}</td>
                             <td>{user.email}</td>
                             <td>{user.address}</td>
-                            <td>
-                                <button onClick={() => handleDelete(user.id)}>Delete</button>
-                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -198,9 +194,8 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.id}
-                            onChange={(e) => handleInputChange('id', e.target.value)}
+                            onChange={(e) => setNewUser({ ...newUser, id: e.target.value })}
                         />
-                        {errors.id && <p style={{ color: 'red' }}>{errors.id}</p>}
                     </label>
                     <br />
                     <label>
@@ -208,9 +203,8 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.username}
-                            onChange={(e) => handleInputChange('username', e.target.value)}
+                            onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
                         />
-                        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
                     </label>
                     <br />
                     <label>
@@ -218,9 +212,8 @@ function AdminManagement() {
                         <input
                             type="password"
                             value={newUser.password}
-                            onChange={(e) => handleInputChange('password', e.target.value)}
+                            onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                         />
-                        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
                     </label>
                     <br />
                     <label>
@@ -228,20 +221,17 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.department}
-                            onChange={(e) => handleInputChange('department', e.target.value)}
+                            onChange={(e) => setNewUser({ ...newUser, department: e.target.value })}
                         />
                     </label>
                     <br />
                     <label>
                         Role:
-                        <select
+                        <input
+                            type="text"
                             value={newUser.role}
-                            onChange={(e) => handleInputChange('role', e.target.value)}
-                        >
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                        {errors.role && <p style={{ color: 'red' }}>{errors.role}</p>}
+                            onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                        />
                     </label>
                     <br />
                     <label>
@@ -249,9 +239,8 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.phone}
-                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                            onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
                         />
-                        {errors.phone && <p style={{ color: 'red' }}>{errors.phone}</p>}
                     </label>
                     <br />
                     <label>
@@ -259,9 +248,8 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
                         />
-                        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
                     </label>
                     <br />
                     <label>
@@ -269,7 +257,7 @@ function AdminManagement() {
                         <input
                             type="text"
                             value={newUser.address}
-                            onChange={(e) => handleInputChange('address', e.target.value)}
+                            onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
                         />
                     </label>
                     <br />
@@ -282,4 +270,3 @@ function AdminManagement() {
 }
 
 export default AdminManagement;
-
