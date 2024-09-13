@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const pool = new Pool({
     user: 'postgres',
-    host: '127.0.0.1',
+    host: '192.168.10.13',
     database: 'MedixAI',
     password: 'Admin123', 
     port: 5432,
