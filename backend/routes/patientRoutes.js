@@ -4,7 +4,8 @@ const {
     addPatient,
     getPatientInfo,
     getPatientInfoById,
-    addPatientInfo
+    addPatientInfo,
+    getPatientById 
 } = require('../controllers/patientController');
 
 
@@ -14,9 +15,10 @@ router.get('/', getPatients);
 router.post('/', addPatient);
 
 
-
+router.get('/:patientId', getPatientById);
 router.get('/patient-info', getPatientInfo); // Get all patient info
 router.get('/patient-info/:patientlist_id', getPatientInfoById); // Get patient info by patientlist_id
 router.post('/patient-info', addPatientInfo); // Add patient info
 
 module.exports = router;
+

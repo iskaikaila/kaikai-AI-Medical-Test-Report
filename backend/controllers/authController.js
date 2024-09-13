@@ -53,19 +53,13 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid username or password' });
         }
 
-        res.status(200).json({
-            message: 'Login successful',
-            user: {
-                id: user.id,
-                username: user.username,
-                role: user.role,
-            },
-        });
+        res.status(200).json({ message: 'Login successful' });
     } catch (err) {
         console.error('Error logging in:', err);
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 
 
 // 获取所有用户

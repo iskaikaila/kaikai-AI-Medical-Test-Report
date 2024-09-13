@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './NavBar.css'; // Ensure this is the correct CSS file path
+import userIcon from './images/user.png'; // Adjust the path if necessary
 
-function NavBar({ page, onLogout, onGoToPersonalInfo }) {
+function NavBar() {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleDoctorInfoClick = () => {
+        window.location.href = '/doctor-information';
+    };
+
+    const handleLogoutClick = () => {
+        window.location.href = '/logout';
+    };
+
     return (
-        <nav>
-            <ul>
-                {page !== 'details' && (
-                    <li>
-                        <button onClick={onGoToPersonalInfo}>Doctor Information</button>
-                    </li>
+        <div className="navbar">
+            <div className="user-info" onClick={toggleDropdown}>
+                <div className="user-icon">
+                    <img src={userIcon} alt="User Icon" />
+                    <span>（用户）</span>
+                </div>
+                {isDropdownOpen && (
+                    <div className="dropdown-menu">
+                        <button className="dropdown-item" onClick={handleDoctorInfoClick}>修改密码</button>
+                        <button className="dropdown-item" onClick={handleLogoutClick}>退出登录</button>
+                    </div>
                 )}
-                <li>
-                    <button onClick={onLogout}>Logout</button>
-                </li>
-            </ul>
-        </nav>
+            </div>
+        </div>
     );
 }
 
