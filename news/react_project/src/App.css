@@ -1,0 +1,189 @@
+/* App.css */
+
+/* 全局样式 */
+a {
+  text-decoration: none; /* 移除链接的下划线 */
+}
+
+a{
+  color: black;
+}
+a:hover p {
+  color: #1e90ff !important; /* 鼠标悬停时的蓝色 */
+}
+
+h2 {
+  text-decoration: none; /* 移除链接的下划线 */
+}
+
+h2{
+  color: black;
+}
+h2:hover p {
+  color: #1e90ff !important; /* 鼠标悬停时的蓝色 */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between; /* 保持两侧对齐 */
+  margin: 20px auto; /* 居中对齐 */
+  padding: 50px 0px 0 50px; /* 调整左侧padding，减少不对称 */
+  width: 95%; /* 适当调整容器宽度 */
+  box-sizing: border-box;
+}
+
+/* 奇闻趣事部分样式 */
+.fun-facts {
+  width: 100%; /* 宽度可以根据需要调整 */
+  background-color: #f9f9f9; /* 背景颜色 */
+  padding: 10px; /* 内边距 */
+  margin-right: 10px; /* 右边距，使它与主要内容部分有间距 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+  border-radius: 5px; /* 边框圆角 */
+}
+
+.fun-facts h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.fun-fact-item {
+  margin-bottom: 15px; /* 每个条目的底部间距 */
+  padding: 5px;
+  border-bottom: 1px solid #ddd; /* 底部分隔线 */
+  display: flex; /* 使用 flex 布局 */
+  align-items: center; /* 使图片和文字垂直居中 */
+}
+
+.fun-fact-item:last-child {
+  border-bottom: none; /* 去掉最后一个项目的底部分隔线 */
+}
+
+
+.main-content{
+  width:70%;
+  margin-left:180px;
+}
+
+.sidebar {
+  width: 35%; /* 调整侧边栏宽度 */
+  margin-left: 0; /* 去除多余的左侧边距 */
+}
+
+
+.carousel-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  max-width: 100%; /* 调整最大宽度 */
+  width: 90%; 
+}
+
+.news-list {
+  margin-top: 20px;
+}
+
+.news-section {
+  margin-left: 120px; /* 增加左侧边距，将 news-section 向右移动 */
+}
+
+.news-item {
+  display: flex;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-image {
+  width: 120px; /* 缩小图片宽度 */
+  height: auto;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer; /* 鼠标移动到图片上时显示为手型 */
+  transition: transform 0.3s ease; /* 添加放大效果 */
+}
+
+.news-image:hover {
+  transform: scale(1.05); /* 鼠标悬停时放大 */
+}
+
+.news-content {
+  flex: 1; /* 占满剩余空间 */
+}
+
+.news-content h3 {
+  margin: 0;
+  font-size: 16px; /* 缩小标题字体 */
+}
+
+.news-content p {
+  margin: 5px 0;
+}
+
+.news-content a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.news-content a:hover {
+  text-decoration: underline;
+}
+
+.news-item h3 {
+  margin: 0;
+  font-size: 14px; /* 缩小标题字体 */
+}
+
+.news-item p {
+  margin: 0;
+  color: #888;
+  font-size: 12px;
+}
+
+/* 右侧边栏 */
+.sidebar {
+  background-color: #fff;
+  margin-left: 10px; /* 将左边距调整为10px，确保左右对齐 */
+}
+
+.authority-release, .video-section {
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.authority-release h2, .video-section h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.authority-release ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.authority-release li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.video-item img {
+  width: 320px; /* 调整图片大小 */
+  height: auto;
+  margin-right: 10px;
+  border-radius: 5px;
+}
