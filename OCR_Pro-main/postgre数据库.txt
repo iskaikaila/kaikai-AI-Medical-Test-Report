@@ -1,0 +1,5 @@
+'dbname': 'ocr_db',  # 确保数据库名称正确
+    'user': 'postgres',  # 确保用户名正确
+    'password': '123456',  # 确保密码正确
+    'host': 'localhost',  # 如果数据库在本地，使用 'localhost'
+    'port': '5432'  # PostgreSQL 默认端口是 5432
